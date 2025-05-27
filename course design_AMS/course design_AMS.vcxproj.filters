@@ -14,4 +14,92 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="menu.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumni.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="list.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="person.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="visitor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumni.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumniFilter.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumniFilter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VistorModle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumniModle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="managerModle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="alumni_list.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="visitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="person.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="department.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="major.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Class.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VistorModle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="alumniModle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="managerModle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="alumni_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
