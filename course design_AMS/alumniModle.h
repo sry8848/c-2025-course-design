@@ -3,10 +3,11 @@
 #include "alumni.h"
 #include "list.h"
 #include "Utils.h"
+#include "alumni_list.h"
 class alumniModle {
 public:
 	void run();
 private:
-	List<alumni>* alumni_list; // 校友列表
+	alumni_list alumni_list; // 校友列表
 	alumni current_alumni; // 当前校友
 };

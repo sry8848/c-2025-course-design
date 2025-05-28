@@ -3,10 +3,12 @@
 #include "manager.h"
 #include "list.h"
 #include "Utils.h"
+#include "alumni_list.h"
 class managerModle {
 public:
 	void run();
 private:
+	alumni_list alumni_list; // Ð£ÓÑÁÐ±í
 	List<manager>* manager_list; 
 	manager current_manager; 
 };

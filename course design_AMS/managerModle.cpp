@@ -20,9 +20,11 @@ void managerModle::run() {
 		int choice = Utils::getChoice(4);
 		string userName;
 		string password;
+		int choice2 = Utils::getChoice(2);
+		int account_type = Utils::getChoice(3);
 		switch (choice) {
 		case 1:
-			manager_list->show();
+			alumni_list.show_allowChange();
 			break;
 		case 2:
 			current_manager.show();
@@ -31,7 +33,6 @@ void managerModle::run() {
 				<< "1.修改密码\n"
 				<< "2.返回上一级\n"
 				<< "-------------------------\n";
-			int choice2 = Utils::getChoice(2);
 			switch (choice2) {
 			case 1:
 				current_manager.modify_password();
@@ -44,7 +45,6 @@ void managerModle::run() {
 			cout << "1.校友账号\n";
 			cout << "2.管理员账号\n";
 			cout << "3.访客账号\n";
-			int account_type = Utils::getChoice(3);
 			if (account_type == 1) {
 				cout << "请输入新校友账号信息：\n";
 				cout << "用户名：";

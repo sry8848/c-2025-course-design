@@ -4,5 +4,5 @@
 #include "person.h"
 class visitor :public person{
 public:
-	visitor(std::string userName_, std::string password_):person::person(userName_, password_){}
+	visitor(std::string userName_, std::string password_);
 }; 

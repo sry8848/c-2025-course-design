@@ -1,8 +1,7 @@
 #pragma once//头文件保护，防止重复包含
 #include "list.h"
 #include "alumniFilter.h"
-template<typename alumni>
-class alumni_list: public list{
+class alumni_list: public List<alumni>{
 public:
 	alumni_list();
 	~alumni_list();
