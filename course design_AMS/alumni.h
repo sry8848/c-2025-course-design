@@ -4,7 +4,7 @@
 #include "person.h"
 class alumni :public person {
 public:
-	alumni(std::string userName_, std::string password_) :person::person(userName_, password_) {}
+	alumni(std::string userName_, std::string password_);
 	void modify_information();
 	void create_information();
 	void show();

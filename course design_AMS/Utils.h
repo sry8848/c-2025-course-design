@@ -5,6 +5,6 @@ class Utils {
 public:
 	//都设计为静态函数，不需要对象即可调用
 	//选项控制
-	static int getChoice(int numberOfChoices) {}//获取用户输入的选项
+	static int getChoice(int numberOfChoices);//获取用户输入的选项
 	//输入验证
 };

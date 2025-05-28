@@ -15,9 +15,10 @@ void alumniModle::run() {
 			<< "3.退出登录\n"
 			<< "-------------------------\n";
 		int choice = Utils::getChoice(3);
+		int choice2 = Utils::getChoice(2);
 		switch (choice) {
 		case 1:
-			alumni_list->show();
+			alumni_list.show();
 			break;
 		case 2:
 			current_alumni.show();
@@ -27,7 +28,6 @@ void alumniModle::run() {
 				<< "2.修改校友信息\n"
 				<< "3.返回上一级\n"
 				<< "-------------------------\n";
-			int choice2 = Utils::getChoice(2);
 			switch (choice2) {
 			case 1:
 				current_alumni.modify_password();
@@ -44,3 +44,4 @@ void alumniModle::run() {
 		}
 
 	}
+}

@@ -3,7 +3,7 @@
 #include "alumni.h"
 #include "Utils.h"
 using namespace std;
-alumni::alumni(std::string userName_, std::string password_) :person::person(userName_, password_) {
+alumni::alumni(std::string userName_, std::string password_) :person(userName_, password_) {
 }
 void alumni::create_information() {
 		cout << "请输入姓名：";
@@ -70,6 +70,12 @@ void alumni::create_information() {
 void alumni::modify_information() {
 	cout << "输入要修改信息前的序号：";
 	int choice=Utils::getChoice(11);
+	int gender_choice = Utils::getChoice(2);
+	int address_choice = Utils::getChoice(2);
+	int phone_choice = Utils::getChoice(2);
+	int qq_choice = Utils::getChoice(2);
+	int email_choice = Utils::getChoice(2);
+	int continue_choice = Utils::getChoice(2);
 	switch (choice) {
 	case 1:
 		cout << "请输入姓名：";
@@ -81,7 +87,6 @@ void alumni::modify_information() {
 		cout << "请选择性别(输入序号)：\n";
 		cout << "1.男" << endl
 			<< "2.女" << endl;
-		int gender_choice = Utils::getChoice(2);
 		if (gender_choice == 1) {
 			gender = 'M';
 		}
@@ -111,7 +116,6 @@ void alumni::modify_information() {
 		break;
 	case 8:
 		cout << "是否显示地址？\n 1.是\n 2.否\n";
-		int address_choice = Utils::getChoice(2);
 		if (address_choice == 2) {
 			address = "保密";
 		}
@@ -123,7 +127,7 @@ void alumni::modify_information() {
 
 	case 9:
 		cout << "是否显示电话？\n 1.是\n 2.否\n";
-		int phone_choice = Utils::getChoice(2);
+		
 		if (phone_choice == 2) {
 			phoneNumber = "保密";
 		}
@@ -134,7 +138,7 @@ void alumni::modify_information() {
 		break;
 	case 10:
 		cout << "是否显示QQ？\n 1.是\n 2.否\n";
-		int qq_choice = Utils::getChoice(2);
+		
 		if (qq_choice == 2) {
 			qq = "保密";
 		}
@@ -145,7 +149,7 @@ void alumni::modify_information() {
 		break;
 	case 11:
 		cout << "是否显示邮箱？\n 1.是\n 2.否\n";
-		int email_choice = Utils::getChoice(2);
+	
 		if (email_choice == 2) {
 			email = "保密";
 		}
@@ -156,7 +160,7 @@ void alumni::modify_information() {
 		break;
 	}
 	cout<<"是否继续修改？\n 1.是\n 2.否\n";
-	int continue_choice = Utils::getChoice(2);
+	
 	if (continue_choice == 1) {
 		modify_information();
 	}
