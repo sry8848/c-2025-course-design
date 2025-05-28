@@ -3,12 +3,13 @@
 #include <string>//用到std::string就包含此头文件
 #include <vector>
 #include "person.h"
+#include "alumni.h"
 class alumniFilter{
 public:
 	alumniFilter(){}
 	void modify_alumniFilter();
 	void show();
-	void filter(std::vector<person>& alumni_list);
+	bool filter(const alumni& falumni) const;//未实现
 private:
 	struct genders {
 		bool is_filtered= false; // 是否筛选

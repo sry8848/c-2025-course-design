@@ -8,10 +8,10 @@ public:
 	void erase(int num);//查找元素并删除
 	bool empty();
 	T operator[](int num);//重载[]
-private:
-	T* head;
+protected:
 	struct Node{
 		T data;
-		T* next;
+		Node* next;
 	};
+	Node* head;
 };
