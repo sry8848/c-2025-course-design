@@ -25,6 +25,7 @@
     <ClCompile Include="alumniFilter.h" />
     <ClCompile Include="alumniModle.cpp" />
     <ClCompile Include="alumni_list.cpp" />
+    <ClCompile Include="fileManger.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="main.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="alumni_list.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="department.h" />
+    <ClInclude Include="fileManager.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="LoginSystem.h" />
     <ClInclude Include="major.h" />

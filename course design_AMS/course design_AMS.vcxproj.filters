@@ -60,6 +60,9 @@
     <ClCompile Include="alumni_list.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="fileManger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
@@ -99,6 +102,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="alumni_list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fileManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

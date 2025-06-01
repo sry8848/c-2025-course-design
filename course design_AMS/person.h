@@ -3,7 +3,7 @@
 #include <string>//用到std::string就包含此头文件
 class person {
 public:
-	person(std::string userName_, std::string password_);
+	person(std::string userName_=0, std::string password_="123456");//默认密码
 	void show();
 	void modify_password();//修改密码
 protected:

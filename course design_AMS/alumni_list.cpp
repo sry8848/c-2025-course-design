@@ -6,6 +6,14 @@
 #include "alumni.h"
 #include "alumniFilter.h"
 using namespace std;
+alumni_list::alumni_list():List<alumni>() {}//完全与list构造函数相同
+alumni_list::~alumni_list() {
+	while(head != NULL) {
+		Node* temp = head;
+		head = head->next;
+		delete temp;
+	}
+}
 void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
 	//List newList;
 	Node* p1 = head;

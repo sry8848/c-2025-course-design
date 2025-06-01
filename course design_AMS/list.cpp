@@ -55,7 +55,7 @@ void List<T>::erase(int num) {
 	}
 }
 template<typename T>
-bool List<T>::empty() {
+bool List<T>::empty() const{
 	return head == NULL;
 }
 template<typename T>

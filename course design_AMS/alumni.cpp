@@ -3,7 +3,34 @@
 #include "alumni.h"
 #include "Utils.h"
 using namespace std;
-alumni::alumni(std::string userName_, std::string password_) :person(userName_, password_) {
+alumni::alumni(
+	std::string userName_,
+	std::string password_,
+	std::string name,
+	std::string pinyin,
+	char gender,
+	int age,
+	int year_of_graduation,
+	std::string department,
+	std::string major,
+	int Class,
+	std::string address,
+	std::string phoneNumber,
+	std::string qq,
+	std::string email
+):person(userName_, password_){
+	this->name = name;
+	this->pinyin = pinyin; // ÐÕÃûÆ´Òô
+	this->gender = gender;
+	this->age = age;
+	this->year_of_graduation = year_of_graduation;
+	this->department = department;
+	this->major = major;
+	this->Class = Class;
+	this->address = address;
+	this->phoneNumber = phoneNumber;
+	this->qq = qq;
+	this->email = email;
 }
 void alumni::create_information() {
 		cout << "ÇëÊäÈëÐÕÃû£º";
