@@ -1,6 +1,16 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <cstdlib>
 #include "LoginSystem.h"
+#include "visitor.h"
+#include "List.h"
+#include "alumni.h"
+#include "alumni_list.h"
+#include "manager.h"
+#include "managerModle.h"
+#include "alumniModle.h"
+#include "fileManager.h"
 #include "Utils.h"
 using namespace std;
 void LoginSystem::run() {
@@ -24,8 +34,10 @@ void LoginSystem::run() {
 			cin >> password;
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
+			List<visitor> visitor_list;
 			switch (choice) {
 			case 1:
+				visitor_list=fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
 				cout << "学生登录\n";
 				break;
 			case 2:

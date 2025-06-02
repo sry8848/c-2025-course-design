@@ -7,4 +7,5 @@ public:
 	//选项控制
 	static int getChoice(int numberOfChoices);//获取用户输入的选项
 	//输入验证
+
 };

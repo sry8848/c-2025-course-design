@@ -13,7 +13,7 @@ alumni::alumni(
 	int year_of_graduation,
 	std::string department,
 	std::string major,
-	int Class,
+	std::string Class,
 	std::string address,
 	std::string phoneNumber,
 	std::string qq,

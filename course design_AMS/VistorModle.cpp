@@ -28,7 +28,6 @@ void VistorModle::run() {
 				<< "3.排序方式\n"
 				<< "4.返回上一级\n"
 				<< "-------------------------\n";
-
 			switch (choice1) {
 			case 1:
 				//alumni_list->search();

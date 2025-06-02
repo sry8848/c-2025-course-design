@@ -14,7 +14,7 @@ public:
 		int year_of_graduation,
 		std::string department,
 		std::string major,
-		int Class,
+		std::string Class,
 		std::string address,
 		std::string phoneNumber,
 		std::string qq,
@@ -29,7 +29,7 @@ public:
 	std::string getPinyin() const { return pinyin; } // 获取姓名拼音
 	std::string getDepartment() const { return department; }
 	std::string getMajor() const { return major; }
-	int getClass() const { return Class; }
+	std::string getClass() const { return Class; }
 	int getAge() const { return age; }
 	int getGraduationYear() const { return year_of_graduation; }
 	std::string getAddress() const { return address; }
@@ -52,7 +52,7 @@ private:
 	int year_of_graduation;
 	std::string department;//系
 	std::string major;//专业
-	int Class;//班级
+	std::string Class;//班级
 	std::string address;
 	std::string phoneNumber;
 	std::string qq;

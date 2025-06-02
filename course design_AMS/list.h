@@ -11,9 +11,12 @@ public:
 	List();
 	~List();
 	void insert(const T& val);//头插法
+	bool count(const T& val);//查找元素是否存在
 	void erase(int num);//查找元素并删除
 	bool empty()const;
 	T operator[](int num);//重载[]
+	List<T> operator=(const List<T>& other);//重载赋值运算符
+	List<T> load(const std::string& fileName);// 保存通用列表到文件
 	//迭代器
 	class Iterator {
 	public:

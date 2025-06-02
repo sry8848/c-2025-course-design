@@ -1,6 +1,8 @@
 #pragma once//头文件保护，防止重复包含
 //不建议头文件包含#include<iostream>，而是使用std::
 #include <string>//用到std::string就包含此头文件
+#include <vector>
+#include "department.h"
 #include "list.h"
 #include "alumni_list.h"
 class fileManager {
@@ -11,5 +13,6 @@ public:
 	static void save_T_list(const std::string& fileName, List<T>& TList); // 从指定文件加载通用列表
 	template <typename T>
 	static List<T> load_T_list(const std::string& fileName); // 保存通用列表到文件
+	static std::vector<Department> load_department_list(const std::string& fileName); // 从指定文件加载系列表
 }
 ;

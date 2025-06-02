@@ -1,13 +1,16 @@
 #pragma once//头文件保护，防止重复包含
-//不建议头文件包含#include<iostream>，而是使用std::
-#include <string>//用到std::string就包含此头文件
+//不建议头文件包含#include<iostream>，而是使用
+#include <string>//用到string就包含此头文件
 #include <fstream>
 #include <iostream>
+#include "department.h"
+#include "Class.h"
+#include "major.h"
 #include "list.h"
 #include "alumni_list.h"	
 #include "fileManager.h"
 using namespace std;
-void fileManager::save_alumni_list(const std::string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
+void fileManager::save_alumni_list(const string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
 	if (alumniList.empty()) {
 		return; // 如果列表为空，直接返回
 	}
@@ -37,7 +40,7 @@ void fileManager::save_alumni_list(const std::string& fileName, const alumni_lis
 	}
 	outfile.close(); // 关闭文件
 }
-alumni_list fileManager::load_alumni_list(const std::string& fileName) {
+alumni_list fileManager::load_alumni_list(const string& fileName) {
 	ifstream infile(fileName);
 	if (!infile) { // 检查文件是否成功打开
 		cerr << "无法打开文件: " << fileName << endl;
@@ -45,20 +48,20 @@ alumni_list fileManager::load_alumni_list(const std::string& fileName) {
 	}
 	alumni_list alumniList;
 	string line;
-	std::string userName_;
-	std::string password_;
-	std::string name;
-	std::string pinyin;
+	string userName_;
+	string password_;
+	string name;
+	string pinyin;
 	char gender;
 	int age;
 	int year_of_graduation;
-	std::string department;
-	std::string major;
-	int Class;
-	std::string address;
-	std::string phoneNumber;
-	std::string qq;
-	std::string email;
+	string department;
+	string major;
+	std::string Class;
+	string address;
+	string phoneNumber;
+	string qq;
+	string email;
 	string tempInformation;
 	getline(infile, line); // 读取表头
 	while (getline(infile, userName_, ',')) {//遇到文件终止符结束
@@ -86,7 +89,7 @@ alumni_list fileManager::load_alumni_list(const std::string& fileName) {
 	return alumniList; // 返回加载的 alumni_list
 }
 template <typename T>
-static void fileManager::save_T_list(const std::string& fileName, List<T>& TList) {
+static void fileManager::save_T_list(const string& fileName, List<T>& TList) {
 	if (TList.empty()) {
 		return; // 如果列表为空，直接返回
 	}
@@ -105,15 +108,15 @@ static void fileManager::save_T_list(const std::string& fileName, List<T>& TList
 	outfile.close(); // 关闭文件
 }
 template <typename T>
-List<T> fileManager::load_T_list(const std::string& fileName){
+List<T> fileManager::load_T_list(const string& fileName){
 	ifstream infile(fileName);
 	if (!infile) { // 检查文件是否成功打开
 		cerr << "无法打开文件: " << fileName << endl;
 		return List<T>(); // 返回一个空的 List<T>
 	}
 	string line;
-	std::string userName_;
-	std::string password_;
+	string userName_;
+	string password_;
 	List<T> TList; // 创建一个通用列表
 	getline(infile, line); // 读取表头
 	while (getline(infile, userName_, ',')) {//遇到文件终止符结束
@@ -123,4 +126,43 @@ List<T> fileManager::load_T_list(const std::string& fileName){
 	}
 	infile.close(); // 关闭文件
 	return TList; // 返回加载的通用列表
+}
+static vector<Department> load_department_list(const string& fileName) {
+	vector<Department> departmentList;
+	ifstream infile(fileName);
+	if (!infile) { // 检查文件是否成功打开
+		cerr << "无法打开文件: " << fileName << endl;
+		return departmentList; // 返回一个空的部门列表
+	}
+	string departmentName;
+	string pre_departmentName = 0; // 用于记录上一个部门名称
+	string majorName;
+	string pre_majorName = 0; // 用于记录上一个专业名称
+	string className;
+	string pre_className = 0; // 用于记录上一个班级名称
+	string line;
+	getline(infile, line);
+	while (getline(infile, departmentName, ',')) {//遇到文件终止符结束
+		if(!getline(infile, majorName, ',')) break;//防止意外错误
+		if (!getline(infile, className)) break;
+		if (departmentName != pre_departmentName) {
+			pre_departmentName = departmentName; // 更新上一个部门名称
+			Department newDepartment(departmentName); // 创建一个新的部门对象
+			departmentList.push_back(newDepartment); // 将新部门添加到列表中
+		}
+		vector<Major>& majors = departmentList.back().getMajorList(); // 获取当前部门的专业列表
+		if (majorName != pre_majorName) {
+			pre_majorName = majorName; 
+			Major newmajor(majorName); 
+			majors.push_back(newmajor);
+		}
+		vector<Class>& classes = majors.back().getClassList(); // 获取当前专业的班级列表
+		if (className != pre_className) {
+			pre_className = className; 
+			Class newClass(className); 
+			classes.push_back(newClass);
+		}
+	}
+	infile.close(); // 关闭文件
+	return departmentList; // 返回加载的部门列表
 }

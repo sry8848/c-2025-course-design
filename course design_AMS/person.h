@@ -6,6 +6,7 @@ public:
 	person(std::string userName_=0, std::string password_="123456");//Ä¬ÈÏÃÜÂë
 	void show();
 	void modify_password();//ĞŞ¸ÄÃÜÂë
+	bool operator==(const person& other) const;
 protected:
 	std::string userName;
 	std::string password;

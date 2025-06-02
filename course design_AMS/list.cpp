@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include "list.h"
+#include "fileManager.h"
 #include "Utils.h"
 #include "alumni.h"
 using namespace std;
@@ -77,5 +78,20 @@ T List<T>::operator[](int num) {
 		}
 		return p1->data;
 	}
+}
+template<typename T>
+bool count(const T& val) {
+	Node* p1 = head;
+	while (p1 != NULL) {
+		if(*p1==val){
+			return true; // 找到元素，返回true
+		}
+		p1 = p1->next;	
+	}
+	return false; // 没有找到元素，返回false
+}
+template<typename T>
+List<T> List<T>::operator=(const List<T>& other) {
+	head = other.head;
 }
 
