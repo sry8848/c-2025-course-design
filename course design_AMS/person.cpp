@@ -3,6 +3,9 @@
 #include "person.h"
 #include "Utils.h"
 using namespace std;
+bool person::operator==(const person& other) const {
+	return userName == other.userName && password == other.password;
+}
 person::person(std::string userName_, std::string password_) {
 	userName = userName_;
 	password = password_;

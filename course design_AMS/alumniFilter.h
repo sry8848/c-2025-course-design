@@ -10,6 +10,7 @@ public:
 	void modify_alumniFilter();
 	void show();
 	bool filter(const alumni& falumni) const;//未实现
+	void clear_filter();//清除筛选条件
 private:
 	struct genders {
 		bool is_filtered= false; // 是否筛选
@@ -29,6 +30,6 @@ private:
 	}major;
 	struct Classes {
 		bool is_filtered = false; // 是否筛选
-		std::vector<int> Classes;
+		std::vector<std::string> Classes;
 	}Class;
 };
