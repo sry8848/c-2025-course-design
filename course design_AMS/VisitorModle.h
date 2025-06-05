@@ -5,11 +5,11 @@
 #include "alumni.h"
 #include "Utils.h"
 #include "alumni_list.h"
-class VistorModle {
+class VisitorModle {
 public:
+	VisitorModle(alumni_list current_alumni_list_,visitor current_visitor_);
 	void run();
 private:
-	List<visitor>* visitor_list; // 访客列表
-	alumni_list alumni_list; // 校友列表
+	alumni_list current_alumni_list; // 校友列表,注意对象一定不要和类型同名！
 	visitor current_visitor; // 当前访客
 };

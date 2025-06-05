@@ -4,5 +4,5 @@
 #include "person.h"
 class visitor :public person{
 public:
-	visitor(std::string userName_, std::string password_);
+	visitor(std::string userName_="", std::string password_ = "123456");//默认构造函数，在传参时必备
 }; 

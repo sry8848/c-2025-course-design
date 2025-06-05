@@ -26,7 +26,6 @@
     <ClCompile Include="alumniModle.cpp" />
     <ClCompile Include="alumni_list.cpp" />
     <ClCompile Include="fileManger.cpp" />
-    <ClCompile Include="list.cpp" />
     <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="managerModle.cpp" />
@@ -50,7 +49,7 @@
     <ClInclude Include="person.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="visitor.h" />
-    <ClInclude Include="VistorModle.h" />
+    <ClInclude Include="VisitorModle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -5,6 +5,11 @@
 #include "alumni.h"
 #include "list.h"
 using namespace std;
+alumniModle::alumniModle(alumni_list current_alumni_list_, alumni current_alumni_) {
+	current_alumni_list = current_alumni_list_;
+	current_alumni = current_alumni_;
+
+}
 void alumniModle::run() {
 	while (true) {
 		cout << "校友录管理系统V1.0\n"
@@ -18,7 +23,7 @@ void alumniModle::run() {
 		int choice2 = Utils::getChoice(2);
 		switch (choice) {
 		case 1:
-			alumni_list.show();
+			current_alumni_list.show();
 			break;
 		case 2:
 			current_alumni.show();

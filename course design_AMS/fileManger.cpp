@@ -127,7 +127,7 @@ List<T> fileManager::load_T_list(const string& fileName){
 	infile.close(); // 关闭文件
 	return TList; // 返回加载的通用列表
 }
-static vector<Department> load_department_list(const string& fileName) {
+vector<Department> fileManager::load_department_list(const string& fileName) {
 	vector<Department> departmentList;
 	ifstream infile(fileName);
 	if (!infile) { // 检查文件是否成功打开
@@ -135,11 +135,11 @@ static vector<Department> load_department_list(const string& fileName) {
 		return departmentList; // 返回一个空的部门列表
 	}
 	string departmentName;
-	string pre_departmentName = 0; // 用于记录上一个部门名称
+	string pre_departmentName = ""; // 用于记录上一个部门名称
 	string majorName;
-	string pre_majorName = 0; // 用于记录上一个专业名称
+	string pre_majorName = ""; // 用于记录上一个专业名称
 	string className;
-	string pre_className = 0; // 用于记录上一个班级名称
+	string pre_className = ""; // 用于记录上一个班级名称
 	string line;
 	getline(infile, line);
 	while (getline(infile, departmentName, ',')) {//遇到文件终止符结束

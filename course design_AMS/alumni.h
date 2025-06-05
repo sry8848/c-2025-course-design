@@ -20,8 +20,7 @@ public:
 		std::string qq,
 		std::string email
 	);
-	alumni(){}
-	alumni(std::string userName, std::string password)
+	alumni(std::string userName_ = "", std::string password_ = "123456")
 		: person(userName, password) {} // 默认构造函数
 	std::string getUserName() const { return userName; }
 	std::string getPassword() const { return password; }
@@ -47,9 +46,9 @@ public:
 private:
 	std::string name;
 	std::string pinyin; // 姓名拼音
-	char gender;
-	int age;
-	int year_of_graduation;
+	char gender='\0';//非string,要设置初始值,否则编译器会报错
+	int age=0;
+	int year_of_graduation=0;
 	std::string department;//系
 	std::string major;//专业
 	std::string Class;//班级

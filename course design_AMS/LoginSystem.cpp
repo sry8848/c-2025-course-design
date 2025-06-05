@@ -11,6 +11,8 @@
 #include "managerModle.h"
 #include "alumniModle.h"
 #include "fileManager.h"
+#include "VisitorModle.h"
+#include "alumniModle.h"
 #include "Utils.h"
 using namespace std;
 void LoginSystem::run() {
@@ -34,20 +36,48 @@ void LoginSystem::run() {
 			cin >> password;
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
-			List<visitor> visitor_list;
+			List<visitor> current_visitor_list;
+			alumni_list current_alumni_list;
+			List<manager> current_manager_list;
+			visitor current_visitor(account, password);
+			manager current_manager(account, password);
+			alumni current_alumni(account, password);
 			switch (choice) {
 			case 1:
-				visitor_list=fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
+				current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
 				cout << "学生登录\n";
+				if (current_visitor_list.count(current_visitor)) {
+					cout<<"登录成功！\n";
+					VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
+					visitorModle.run();
+				}
 				break;
 			case 2:
+				current_alumni_list = fileManager::load_alumni_list("alumni.txt");
 				cout << "校友登录\n";
+				if (current_alumni_list.count(current_alumni)) {
+					cout<<"登录成功！\n";
+					alumniModle alumniModle(current_alumni_list, current_alumni);//创建alumniModle对象
+					alumniModle.run();
+				}
 				break;
 			case 3:
+				current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");
 				cout << "访客登录\n";
+				if (current_visitor_list.count(current_visitor)) {
+					cout<<"登录成功！\n";
+					VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
+					visitorModle.run();
+				}
 				break;
 			case 4:
+				current_manager_list = fileManager::load_T_list<manager>("manager.txt");
 				cout << "管理员登录\n";
+				if (current_manager_list.count(current_manager)) {
+					cout<<"登录成功！\n";
+					managerModle managerModle(current_alumni_list, current_manager);//创建managerModle对象
+					managerModle.run();
+				}
 				break;
 			}
 			cout << "用户名或密码错误！\n"
