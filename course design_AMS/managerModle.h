@@ -3,12 +3,15 @@
 #include "manager.h"
 #include "list.h"
 #include "Utils.h"
+#include "visitor.h"
 #include "alumni_list.h"
 class managerModle {
 public:
+	managerModle(alumni_list current_alumni_list_, manager current_manager_);
 	void run();
 private:
-	alumni_list alumni_list; // 校友列表
-	List<manager>* manager_list; 
-	manager current_manager; 
+	List<visitor> current_visitor_list;
+	List<manager> current_manager_list;
+	alumni_list current_alumni_list; // 校友列表,注意对象一定不要和类型同名！
+	manager current_manager; // 当前访客
 };

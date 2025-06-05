@@ -2,9 +2,12 @@
 //不建议头文件包含#include<iostream>，而是使用std::
 #include <string>//用到std::string就包含此头文件
 #include <vector>
-#include "department.h"
 #include "list.h"
 #include "alumni_list.h"
+#include "department.h"
+template <typename T> class List;
+class alumni_list;
+class Department;//添加前向声明，避免循环依赖！！
 class fileManager {
 public:
 	static void save_alumni_list(const std::string& fileName,const alumni_list& alumniList); // 保存校友列表到文件                                                                                             

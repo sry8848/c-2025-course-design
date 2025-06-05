@@ -1,19 +1,15 @@
 #include <iostream>
 #include <iomanip>
+#include <utility>
+#include <set>
+#include <string>
 #include <cstdlib>
 #include "alumni_list.h"
 #include "Utils.h"
 #include "alumni.h"
 #include "alumniFilter.h"
 using namespace std;
-alumni_list::alumni_list():List<alumni>() {}//完全与list构造函数相同
-alumni_list::~alumni_list() {
-	while(head != NULL) {
-		Node* temp = head;
-		head = head->next;
-		delete temp;
-	}
-}
+
 void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
 	//List newList;
 	Node* p1 = head;
@@ -165,4 +161,34 @@ void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 			}
 		}
 	}
+}
+alumni_list alumni_list::search_form_line(const std::string& keyword) const {
+	alumni_list result;
+	Node* p1 = head;
+	int weight = 0;
+	set<pair<int, Node*>, greater<pair<int, Node*>>> myset;//存储匹配到的结点和权值，按照权值排序,greater<T>表示降序排列
+	while (p1 != NULL) {
+		string gen;//性别
+		if (p1->data.getGender() == 'M') {
+			gen = "男";
+		}
+		else if (p1->data.getGender() == 'W') {
+			gen = "女";
+		}
+		weight += Utils::serach_return_weight(p1->data.getName(), keyword)
+			+ Utils::serach_return_weight(to_string(p1->data.getGraduationYear()), keyword)
+			+ Utils::serach_return_weight(to_string(p1->data.getAge()), keyword)
+			+ Utils::serach_return_weight(gen, keyword)
+			+ Utils::serach_return_weight(p1->data.getMajor(), keyword)
+			+ Utils::serach_return_weight(p1->data.getClass(), keyword)
+			+ Utils::serach_return_weight(p1->data.getDepartment(), keyword);
+		if (weight != 0) {//如果没有匹配到任何字段，则不加入结果
+			myset.insert(make_pair(weight, p1));//如果匹配到0个以上字段，连带权值加入集合set
+		}
+		p1 = p1->next;
+	}
+	for (const auto& item : myset) {//一种遍历容器的方法，const表示item不能被修改，item是pair类型对象，first为权值，second为指向Node的指针，myset是一个容器
+		result.insert(item.second->data);//将匹配到的结点加入结果
+	}
+	return result;
 }

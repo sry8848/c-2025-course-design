@@ -4,7 +4,5 @@
 #include "person.h"
 class manager :public person {
 public:
-	manager(std::string userName_, std::string password_) :person::person(userName_, password_){}
-	void add_account(std::string userName_, std::string password_);//Ìí¼ÓÕËºÅ
-	void add_alumni();//Ìí¼ÓĞ£ÓÑ
+	manager(std::string userName_="", std::string password_="123456") :person::person(userName_, password_) {}
 };

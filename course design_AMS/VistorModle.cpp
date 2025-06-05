@@ -1,12 +1,17 @@
 #include <iostream>
 #include <cstdlib>
-#include "VistorModle.h"
+#include "alumni_list.h"
+#include "list.h"
+#include "VisitorModle.h"
 #include "Utils.h"
 #include "alumni.h"
-#include "list.h"
 #include "alumniFilter.h"
 using namespace std;
-void VistorModle::run() {
+VisitorModle::VisitorModle(alumni_list current_alumni_list_, visitor current_visitor_) {
+	current_alumni_list = current_alumni_list_;
+	current_visitor = current_visitor_;
+}
+void VisitorModle::run() {
 	while (true) {
 		cout << "校友录管理系统V1.0\n"
 			<< "-------------------------\n"
@@ -20,6 +25,8 @@ void VistorModle::run() {
 		int choice1 = Utils::getChoice(4);
 		int choice2 = Utils::getChoice(4);
 		int choice3 = Utils::getChoice(2);
+		string keyword;
+		alumni_list search_list;
 		switch (choice) {
 		case 1:
 			cout << "选项：\n"
@@ -30,12 +37,19 @@ void VistorModle::run() {
 				<< "-------------------------\n";
 			switch (choice1) {
 			case 1:
-				//alumni_list->search();
+				cout<< "搜索：";
+				getline(cin, keyword);
+				search_list=current_alumni_list.search_form_line(keyword);
+				if (search_list.empty()) {
+					cout << "没有找到相关校友信息！\n";
+				} else {
+					search_list.show();
+				}
 				break;
 			case 2:
 				Filter.modify_alumniFilter();
-				Filter.show();
-				alumni_list.filter_show(Filter);
+				Filter.show();//显示筛选条件
+				current_alumni_list.filter_show(Filter);//筛选并显示校友信息
 				break;
 			case 3:
 				cout << "选项：\n"
@@ -47,19 +61,19 @@ void VistorModle::run() {
 
 				switch (choice2) {
 				case 1:
-					alumni_list.sort(alumni::Compare_by_name_up);
+					current_alumni_list.sort(alumni::Compare_by_name_up);
 					break;
 				case 2:
-					alumni_list.sort(alumni::Compare_by_name_down);
+					current_alumni_list.sort(alumni::Compare_by_name_down);
 					break;
 				case 3:
-					alumni_list.sort(alumni::Compare_by_year_up);
+					current_alumni_list.sort(alumni::Compare_by_year_up);
 					break;
 				case 4:
-					alumni_list.sort(alumni::Compare_by_year_down);
+					current_alumni_list.sort(alumni::Compare_by_year_down);
 					break;
 				}
-				Filter.show();
+				current_alumni_list.show();
 				break;
 			case 4:
 				break;

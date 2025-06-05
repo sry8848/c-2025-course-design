@@ -6,7 +6,9 @@
 #include "alumni.h"
 class alumniFilter{
 public:
-	alumniFilter(){}
+	//已在定义中初始化成员变量，不需要构造函数来再次初始化，否则报错已有主体定义
+	//析构函数不需要做什么，因为成员变量是值类型，自动释放
+	//如果成员变量是指针类型，则需要手动释放内存
 	void modify_alumniFilter();
 	void show();
 	bool filter(const alumni& falumni) const;//未实现

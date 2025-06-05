@@ -7,5 +7,7 @@ public:
 	//选项控制
 	static int getChoice(int numberOfChoices);//获取用户输入的选项
 	//输入验证
-
+	//字符转换
+	//字段查找
+	static int serach_return_weight(const std::string& str, const std::string& key);//在字符串中查找子串并返回权重值
 };

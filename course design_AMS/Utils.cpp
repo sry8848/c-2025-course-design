@@ -23,3 +23,20 @@ using namespace std;
 		return getChoice(numberOfChoices);
 	}
 }
+	int Utils::serach_return_weight(const std::string& str, const std::string& key) {
+		size_t strp = 0, keyp = 0;
+		int weight = 0;
+		while (keyp < str.size()) {
+			while (strp < str.size()) {
+				if (str[strp] == key[keyp]) {
+					weight += 1;
+					keyp++;
+					if (keyp == key.size()) {
+						return weight;
+					}
+				}
+				strp++;
+			}
+		}
+		return weight;
+	}
