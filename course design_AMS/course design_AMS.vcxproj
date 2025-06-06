@@ -31,7 +31,6 @@
     <ClCompile Include="managerModle.cpp" />
     <ClCompile Include="menu.h" />
     <ClCompile Include="person.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="visitor.cpp" />
     <ClCompile Include="VistorModle.cpp" />
@@ -42,12 +41,13 @@
     <ClInclude Include="Class.h" />
     <ClInclude Include="department.h" />
     <ClInclude Include="fileManager.h" />
-    <ClInclude Include="List.h" />
+    <ClInclude Include="myList.h" />
     <ClInclude Include="LoginSystem.h" />
     <ClInclude Include="major.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="managerModle.h" />
     <ClInclude Include="person.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="visitor.h" />
     <ClInclude Include="VisitorModle.h" />

@@ -5,7 +5,7 @@
 #include "manager.h"
 #include "visitor.h"
 #include "alumni.h"
-#include "list.h"
+#include "myList.h"
 using namespace std;
 managerModle::managerModle(alumni_list current_alumni_list_, manager current_manager_) {
 	current_alumni_list = current_alumni_list_;

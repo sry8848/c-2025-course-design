@@ -3,7 +3,7 @@
 #include "alumniModle.h"
 #include "Utils.h"
 #include "alumni.h"
-#include "list.h"
+#include "myList.h"
 using namespace std;
 alumniModle::alumniModle(alumni_list current_alumni_list_, alumni current_alumni_) {
 	current_alumni_list = current_alumni_list_;
