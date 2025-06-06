@@ -2,8 +2,8 @@
 //不建议头文件包含#include<iostream>，而是使用std::
 #include <string>//用到std::string就包含此头文件
 #include <vector>
-#include "list.h"
 #include "alumni_list.h"
+#include "list.h"
 #include "department.h"
 template <typename T> class List;
 class alumni_list;

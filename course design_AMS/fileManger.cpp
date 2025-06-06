@@ -6,9 +6,11 @@
 #include "department.h"
 #include "Class.h"
 #include "major.h"
-#include "list.h"
-#include "alumni_list.h"	
+#include "alumni_list.h"
+#include "list.h"	
 #include "fileManager.h"
+
+
 using namespace std;
 void fileManager::save_alumni_list(const string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
 	if (alumniList.empty()) {

@@ -2,21 +2,17 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include "alumni.h"
 #include "fileManager.h"
 #include "Utils.h"
-#include "alumni.h"
-using namespace std;
-class fileManager;
-class alumni;
 template<typename T>
 class List {
-protected:
+public:
 	struct Node {//Node结构体需定义在Iterator类之前，否则会报错
 		T data;
-		Node* next=NULL;
+		Node* next = NULL;
 	};
 	Node* head;
-public:
 	/*List();
 	~List();
 	void insert(const T& val);//头插法
@@ -31,7 +27,7 @@ public:
 		head = NULL;
 	}
 	//template<typename T>
-	void clear() {
+	void clear(){
 		while (head != NULL) {
 			Node* temp = head;
 			head = head->next;
@@ -43,7 +39,7 @@ public:
 	}
 	
 	//template<typename T>
-	void insert(const T& val) {
+	void insert(const T& val){
 		Node* temp = head;
 		head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
 		if (head != NULL) {
@@ -54,7 +50,7 @@ public:
 	//template<typename T>
 	void erase(int num) {
 		if (num < 1) {
-			cerr << "out of range\n";
+			std::cerr << "out of range\n";
 			exit(1);
 		}
 		else if (num == 1) {
@@ -70,7 +66,7 @@ public:
 					p1 = p1->next;//p1为删除结点前一个结点
 				}
 				else {
-					cerr << "out of range\n";
+					std::cerr << "out of range\n";
 					exit(1);
 				}
 			}
@@ -86,7 +82,7 @@ public:
 	//template<typename T>
 	T operator[](int num) {
 		if (num < 1) {
-			cerr << "out of range\n";
+			std::cerr << "out of range\n";
 			exit(1);
 		}
 		else {
@@ -96,7 +92,7 @@ public:
 					p1 = p1->next;
 				}
 				else {
-					cerr << "out of range\n";
+					std::cerr << "out of range\n";
 					exit(1);
 				}
 			}
@@ -115,20 +111,19 @@ public:
 		return false; // 没有找到元素，返回false
 	}
 	//template<typename T>
-	List<T> operator=(const List<T>& other) {
-		other.clear();
-		Node* p1 = head;
+	List<T>& operator=(const List<T>& other) {
+		if (this == &other) {
+			return *this; // 防止自赋值
+		}
+		this->clear(); // 清空当前链表
+		Node* p1 = other.head;
 		while (p1 != NULL) {
-			other.insert(p1->date);
+			insert(p1->data);
 			p1 = p1->next;
 		}
+		return *this;
 	}
-	//template<typename T>
-	List<T> load(const std::string& fileName) {
-		List<T> newList;
-		newList = fileManager::load_T_list(fileName);
-		return newList;
-	}
+	
 
 
 	//迭代器
@@ -145,3 +140,4 @@ public:
 	Iterator begin() const{ return Iterator(head); }//需要定义在Iterator类外，否则会报错
 	Iterator end() const{ return Iterator(nullptr); }
 };
+//template class List<alumni>;

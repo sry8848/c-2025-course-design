@@ -4,32 +4,31 @@
 #include <set>
 #include <string>
 #include <cstdlib>
-#include "alumni_list.h"
+#include "alumni_list.h"//重要重要非常重要，必须先包含此头文件！！！！！
 #include "Utils.h"
-#include "alumni.h"
 #include "alumniFilter.h"
 using namespace std;
-
+template class List<alumni>;
 void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
 	//List newList;
-	Node* p1 = head;
-	Node* p2 = head;//p1,p2都为目标结点前一个结点
+	auto p1 = head;
+	auto p2 = head;//p1,p2都为目标结点前一个结点
 	//head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
 	/*if (head != NULL) {
 		head->data = val;
 		head->next = temp;
 	}*/
-	while ((p2->next) != NULL) {
+	while ((p2->next) != NULL) {//
 		if (Compare(head->data, (p2->next)->data)) {//头结点特殊处理
-			Node* aim = (p2->next);
+			auto aim = (p2->next);
 			p2->next = aim->next;
 			aim->next = head;
 			head = aim;
 		}
-		Node* p1 = head;
-			while ((p1->next) != (p2->next)) {
+		p1 = head;
+			while ((p1->next) != (p2->next)) {//交换
 				if (Compare((p1->next)->data, (p2->next)->data)) {//头结点特殊处理
-					Node* aim = (p2->next);
+					auto aim = (p2->next);
 					p2->next = aim->next;
 					aim->next = (p1->next);
 					p1->next = aim;
@@ -37,13 +36,13 @@ void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) 
 				}
 				p1 = p1->next;
 			}
-
+			p2 = p2->next;
 	}
 }
 
 void alumni_list::show() const {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = head;
 	while (p1 != NULL) {
 		cout << setw(4) << setfill('0') << i << " ";
 		p1->data.show();
@@ -62,7 +61,7 @@ void alumni_list::show() const {
 
 void alumni_list::filter_show(const alumniFilter& myAlumniFilter) const {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = head;
 	while (p1 != NULL) {
 		if (myAlumniFilter.filter(p1->data)) {
 			cout << setw(4) << setfill('0') << i << " ";
@@ -83,7 +82,7 @@ void alumni_list::filter_show(const alumniFilter& myAlumniFilter) const {
 
 void alumni_list::show_allowChange() {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = head;
 	while (p1 != NULL) {
 		cout << setw(4) << setfill('0') << i << " ";
 		p1->data.show();
@@ -123,7 +122,7 @@ void alumni_list::show_allowChange() {
 
 void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = head;
 	while (p1 != NULL) {
 		if (alumniFilter.filter(p1->data)) {//筛选并标序号
 			cout << setw(4) << setfill('0') << i << " ";
@@ -164,9 +163,9 @@ void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 }
 alumni_list alumni_list::search_form_line(const std::string& keyword) const {
 	alumni_list result;
-	Node* p1 = head;
+	auto p1 = head;
 	int weight = 0;
-	set<pair<int, Node*>, greater<pair<int, Node*>>> myset;//存储匹配到的结点和权值，按照权值排序,greater<T>表示降序排列
+	set<pair<int, List<alumni>::Node*>, greater<pair<int, List<alumni>::Node*>>> myset;//存储匹配到的结点和权值，按照权值排序,greater<T>表示降序排列
 	while (p1 != NULL) {
 		string gen;//性别
 		if (p1->data.getGender() == 'M') {
