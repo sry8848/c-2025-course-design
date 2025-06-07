@@ -1,3 +1,5 @@
+/*
+
 #include <iostream>
 #include <cstdlib>
 #include "alumni_list.h"
@@ -101,3 +103,5 @@ void VisitorModle::run() {
 
 	}
 }
+
+*/

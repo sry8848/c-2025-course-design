@@ -10,6 +10,10 @@
 #include "myList.h"	
 #include "fileManager.h"
 using namespace std;
+
+/*
+* 
+* 
 void fileManager::save_alumni_list(const string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
 	if (alumniList.empty()) {
 		return; // 如果列表为空，直接返回
@@ -107,28 +111,7 @@ static void fileManager::save_T_list(const string& fileName, List<T>& TList) {
 	}
 	outfile.close(); // 关闭文件
 }
-/*
-template <typename T>
-List<T> fileManager::load_T_list(const string& fileName) {
-	ifstream infile(fileName);
-	if (!infile) { // 检查文件是否成功打开
-		cerr << "无法打开文件: " << fileName << endl;
-		return List<T>(); // 返回一个空的 List<T>
-	}
-	string line;
-	string userName_;
-	string password_;
-	List<T> TList; // 创建一个通用列表
-	getline(infile, line); // 读取表头
-	while (getline(infile, userName_, ',')) {//遇到文件终止符结束
-		getline(infile, password_);
-		T item(userName_, password_);
-		TList.insert(item);
-	}
-	infile.close(); // 关闭文件
-	return TList; // 返回加载的通用列表
-}
-*/
+
 vector<Department> fileManager::load_department_list(const string& fileName) {
 	vector<Department> departmentList;
 	ifstream infile(fileName);
@@ -168,3 +151,34 @@ vector<Department> fileManager::load_department_list(const string& fileName) {
 	infile.close(); // 关闭文件
 	return departmentList; // 返回加载的部门列表
 }
+
+
+
+
+///////
+
+
+
+
+
+template <typename T>
+List<T> fileManager::load_T_list(const string& fileName) {
+	ifstream infile(fileName);
+	if (!infile) { // 检查文件是否成功打开
+		cerr << "无法打开文件: " << fileName << endl;
+		return List<T>(); // 返回一个空的 List<T>
+	}
+	string line;
+	string userName_;
+	string password_;
+	List<T> TList; // 创建一个通用列表
+	getline(infile, line); // 读取表头
+	while (getline(infile, userName_, ',')) {//遇到文件终止符结束
+		getline(infile, password_);
+		T item(userName_, password_);
+		TList.insert(item);
+	}
+	infile.close(); // 关闭文件
+	return TList; // 返回加载的通用列表
+}
+*/

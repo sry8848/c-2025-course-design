@@ -20,8 +20,7 @@ public:
 		std::string qq,
 		std::string email
 	);
-	alumni(std::string userName_ = "", std::string password_ = "123456")
-		: person(userName, password) {} // 默认构造函数
+	alumni() = default; // 默认构造函数
 	std::string getUserName() const { return userName; }
 	std::string getPassword() const { return password; }
 	std::string getName() const { return name; }

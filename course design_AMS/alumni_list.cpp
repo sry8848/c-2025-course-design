@@ -1,3 +1,5 @@
+/*
+
 //alumni_list.cpp
 #include <iostream>
 #include <iomanip>
@@ -15,10 +17,6 @@ void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) 
 	auto p1 = alumniList.head;
 	auto p2 = alumniList.head;//p1,p2都为目标结点前一个结点
 	//alumniList.head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
-	/*if (alumniList.head != NULL) {
-		alumniList.head->data = val;
-		alumniList.head->next = temp;
-	}*/
 	while ((p2->next) != NULL) {//
 		if (Compare(alumniList.head->data, (p2->next)->data)) {//头结点特殊处理
 			auto aim = (p2->next);
@@ -192,3 +190,5 @@ alumni_list alumni_list::search_form_line(const std::string& keyword) const {
 	}
 	return result;
 }
+
+*/

@@ -11,7 +11,7 @@
 #include "alumniFilter.h"
 #include "Utils.h"
 using namespace std;
-
+/*
 void alumniFilter::modify_alumniFilter() {
 	while (true) {
 		cout << "筛选条件：\n 1.性别\n 2.毕业年份\n 3.系/专业/班级\n 4.返回上一级\n";
@@ -250,3 +250,4 @@ void alumniFilter::clear_filter() {
 	Class.Classes.clear();
 
 }
+*/

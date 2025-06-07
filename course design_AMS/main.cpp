@@ -7,5 +7,7 @@
 #include "Utils.h"
 using namespace std;
 int main() {
+	LoginSystem LS();
+
 	return 0;
 }

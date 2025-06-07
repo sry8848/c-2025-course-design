@@ -1,3 +1,5 @@
+/*
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,7 +16,6 @@
 #include "VisitorModle.h"
 #include "alumniModle.h"
 #include "Utils.h"
-using namespace std;
 void LoginSystem::run() {
 	while (true) {
 		cout << "校友录管理系统V1.0\n"
@@ -36,12 +37,24 @@ void LoginSystem::run() {
 			cin >> password;
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
+			std::string name = "";
+			std::string pinyin = "";
+			char gender = '\0';
+			int age = 0;
+			int year_of_graduation = 0;
+			std::string department = "";
+			std::string major = "";
+			std::string Class = "";
+			std::string address = "";
+			std::string phoneNumber = "";
+			std::string qq = "";
+			std::string email = "";
 			List<visitor> current_visitor_list;
 			alumni_list current_alumni_list;
 			List<manager> current_manager_list;
 			visitor current_visitor(account, password);
 			manager current_manager(account, password);
-			alumni current_alumni(account, password);
+			alumni current_alumni(account, password, "", "", '\0', 0, 0, "", "", "", "", "", "", "");
 			switch (choice) {
 			case 1:
 				current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
@@ -96,3 +109,5 @@ void LoginSystem::run() {
 		}
 	}
 }
+
+*/

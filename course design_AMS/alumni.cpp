@@ -4,20 +4,20 @@
 #include "Utils.h"
 using namespace std;
 alumni::alumni(
-	std::string userName_,
-	std::string password_,
-	std::string name,
-	std::string pinyin,
-	char gender,
-	int age,
-	int year_of_graduation,
-	std::string department,
-	std::string major,
-	std::string Class,
-	std::string address,
-	std::string phoneNumber,
-	std::string qq,
-	std::string email
+	std::string userName_="",
+	std::string password_="123456",
+	std::string name="",
+	std::string pinyin = "",
+	char gender='\0',
+	int age=0,
+	int year_of_graduation=0,
+	std::string department = "",
+	std::string major = "",
+	std::string Class = "",
+	std::string address = "",
+	std::string phoneNumber = "",
+	std::string qq = "",
+	std::string email = ""
 ):person(userName_, password_){
 	this->name = name;
 	this->pinyin = pinyin; // ĞÕÃûÆ´Òô

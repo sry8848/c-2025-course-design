@@ -1,11 +1,10 @@
+/*
+
+
 #include <iostream>
 #include <cstdlib>
 #include "managerModle.h"
-#include "Utils.h"
-#include "manager.h"
-#include "visitor.h"
 #include "alumni.h"
-#include "myList.h"
 using namespace std;
 managerModle::managerModle(alumni_list current_alumni_list_, manager current_manager_) {
 	current_alumni_list = current_alumni_list_;
@@ -111,7 +110,7 @@ void managerModle::run() {
 				cin >> userName;
 				cout << "密码：";
 				cin >> password;
-				alumni new_alumni(userName, password);
+				alumni new_alumni(userName, password, "", "", '\0', 0, 0, "", "", "", "", "", "", "");
 				new_alumni.create_information();
 				current_alumni_list.insert(new_alumni); // 将新校友添加到校友列表
 			}
@@ -139,3 +138,6 @@ void managerModle::run() {
 		}
 		}
 	}
+
+
+	*/
