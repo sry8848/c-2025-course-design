@@ -1,35 +1,35 @@
+//alumni_list.cpp
 #include <iostream>
 #include <iomanip>
 #include <utility>
 #include <set>
 #include <string>
 #include <cstdlib>
-#include "alumni_list.h"
+#include "alumni_list.h"//重要重要非常重要，必须先包含此头文件！！！！！
 #include "Utils.h"
-#include "alumni.h"
 #include "alumniFilter.h"
 using namespace std;
-
+template class List<alumni>;
 void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
 	//List newList;
-	Node* p1 = head;
-	Node* p2 = head;//p1,p2都为目标结点前一个结点
-	//head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
-	/*if (head != NULL) {
-		head->data = val;
-		head->next = temp;
+	auto p1 = alumniList.head;
+	auto p2 = alumniList.head;//p1,p2都为目标结点前一个结点
+	//alumniList.head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
+	/*if (alumniList.head != NULL) {
+		alumniList.head->data = val;
+		alumniList.head->next = temp;
 	}*/
-	while ((p2->next) != NULL) {
-		if (Compare(head->data, (p2->next)->data)) {//头结点特殊处理
-			Node* aim = (p2->next);
+	while ((p2->next) != NULL) {//
+		if (Compare(alumniList.head->data, (p2->next)->data)) {//头结点特殊处理
+			auto aim = (p2->next);
 			p2->next = aim->next;
-			aim->next = head;
-			head = aim;
+			aim->next = alumniList.head;
+			alumniList.head = aim;
 		}
-		Node* p1 = head;
-			while ((p1->next) != (p2->next)) {
+		p1 = alumniList.head;
+			while ((p1->next) != (p2->next)) {//交换
 				if (Compare((p1->next)->data, (p2->next)->data)) {//头结点特殊处理
-					Node* aim = (p2->next);
+					auto aim = (p2->next);
 					p2->next = aim->next;
 					aim->next = (p1->next);
 					p1->next = aim;
@@ -37,13 +37,13 @@ void alumni_list::sort(bool (*Compare)(const alumni& val1, const alumni& val2)) 
 				}
 				p1 = p1->next;
 			}
-
+			p2 = p2->next;
 	}
 }
 
 void alumni_list::show() const {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = alumniList.head;
 	while (p1 != NULL) {
 		cout << setw(4) << setfill('0') << i << " ";
 		p1->data.show();
@@ -62,7 +62,7 @@ void alumni_list::show() const {
 
 void alumni_list::filter_show(const alumniFilter& myAlumniFilter) const {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = alumniList.head;
 	while (p1 != NULL) {
 		if (myAlumniFilter.filter(p1->data)) {
 			cout << setw(4) << setfill('0') << i << " ";
@@ -83,7 +83,7 @@ void alumni_list::filter_show(const alumniFilter& myAlumniFilter) const {
 
 void alumni_list::show_allowChange() {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = alumniList.head;
 	while (p1 != NULL) {
 		cout << setw(4) << setfill('0') << i << " ";
 		p1->data.show();
@@ -104,7 +104,7 @@ void alumni_list::show_allowChange() {
 				while (1) {
 					cout << "请输入要删除的校友信息前的序号（输入0结束输入）：";
 					num = Utils::getChoice(i);
-					erase(num);
+					alumniList.erase(num);
 					if (choice == 0) {
 						break;
 					}
@@ -123,7 +123,7 @@ void alumni_list::show_allowChange() {
 
 void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 	int i = 1;
-	Node* p1 = head;
+	auto p1 = alumniList.head;
 	while (p1 != NULL) {
 		if (alumniFilter.filter(p1->data)) {//筛选并标序号
 			cout << setw(4) << setfill('0') << i << " ";
@@ -146,7 +146,7 @@ void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 				while (1) {
 					cout << "请输入要删除的校友信息前的序号（输入0结束输入）：";
 					num = Utils::getChoice(i);
-					erase(num);
+					alumniList.erase(num);
 					if (choice == 0) {
 						break;
 					}
@@ -164,9 +164,9 @@ void alumni_list::filter_show_allowChange(const alumniFilter& alumniFilter) {
 }
 alumni_list alumni_list::search_form_line(const std::string& keyword) const {
 	alumni_list result;
-	Node* p1 = head;
+	auto p1 = alumniList.head;
 	int weight = 0;
-	set<pair<int, Node*>, greater<pair<int, Node*>>> myset;//存储匹配到的结点和权值，按照权值排序,greater<T>表示降序排列
+	set<pair<int, List<alumni>::Node*>, greater<pair<int, List<alumni>::Node*>>> myset;//存储匹配到的结点和权值，按照权值排序,greater<T>表示降序排列
 	while (p1 != NULL) {
 		string gen;//性别
 		if (p1->data.getGender() == 'M') {
@@ -188,7 +188,7 @@ alumni_list alumni_list::search_form_line(const std::string& keyword) const {
 		p1 = p1->next;
 	}
 	for (const auto& item : myset) {//一种遍历容器的方法，const表示item不能被修改，item是pair类型对象，first为权值，second为指向Node的指针，myset是一个容器
-		result.insert(item.second->data);//将匹配到的结点加入结果
+		result.alumniList.insert(item.second->data);//将匹配到的结点加入结果
 	}
 	return result;
 }

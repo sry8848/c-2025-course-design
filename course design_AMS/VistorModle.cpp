@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "alumni_list.h"
-#include "list.h"
+#include "myList.h"
 #include "VisitorModle.h"
 #include "Utils.h"
 #include "alumni.h"

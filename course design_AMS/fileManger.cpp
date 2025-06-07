@@ -6,8 +6,8 @@
 #include "department.h"
 #include "Class.h"
 #include "major.h"
-#include "list.h"
-#include "alumni_list.h"	
+#include "alumni_list.h"
+#include "myList.h"	
 #include "fileManager.h"
 using namespace std;
 void fileManager::save_alumni_list(const string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
@@ -107,8 +107,9 @@ static void fileManager::save_T_list(const string& fileName, List<T>& TList) {
 	}
 	outfile.close(); // 关闭文件
 }
+/*
 template <typename T>
-List<T> fileManager::load_T_list(const string& fileName){
+List<T> fileManager::load_T_list(const string& fileName) {
 	ifstream infile(fileName);
 	if (!infile) { // 检查文件是否成功打开
 		cerr << "无法打开文件: " << fileName << endl;
@@ -127,6 +128,7 @@ List<T> fileManager::load_T_list(const string& fileName){
 	infile.close(); // 关闭文件
 	return TList; // 返回加载的通用列表
 }
+*/
 vector<Department> fileManager::load_department_list(const string& fileName) {
 	vector<Department> departmentList;
 	ifstream infile(fileName);

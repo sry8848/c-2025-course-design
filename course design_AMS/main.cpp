@@ -1,6 +1,6 @@
 #include <iostream>
-#include "list.h"
-#include "VistorModle.h"
+#include "myList.h"
+#include "VisitorModle.h"
 #include "alumniModle.h"
 #include "managerModle.h"
 #include "LoginSystem.h"
