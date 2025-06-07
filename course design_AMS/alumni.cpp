@@ -1,3 +1,5 @@
+/*
+
 #include <iostream>
 #include <cstdlib>
 #include "alumni.h"
@@ -222,3 +224,5 @@ bool alumni::Compare_by_name_up(const alumni& left, const alumni& right) {
 bool alumni::Compare_by_name_down(const alumni& left, const alumni& right) {
 	return left.pinyin < right.pinyin;
 }
+
+*/

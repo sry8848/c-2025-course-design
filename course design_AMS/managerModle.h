@@ -11,15 +11,13 @@
 using namespace std;
 class managerModle {
 public:
-
 	managerModle(alumni_list current_alumni_list_, manager current_manager_) {
 		current_alumni_list = current_alumni_list_;
 		current_manager = current_manager_;
-
 	}
 	void run() {
 		while (true) {
-			cout << "校友录管理系统V1.0\n"
+			cout << "\n校友录管理系统V1.0\n"
 				<< "-------------------------\n"
 				<< "选项：\n"
 				<< "1.查找校友\n"
@@ -30,12 +28,12 @@ public:
 			int choice = Utils::getChoice(4);
 			string userName;
 			string password;
-			int choice2 = Utils::getChoice(2);
-			int account_type = Utils::getChoice(3);
+			int choice2;
+			int account_type;
 			alumniFilter Filter(fileManager::load_department_list("department.txt"));
-			int choice1 = Utils::getChoice(4);
-			int sort_choice = Utils::getChoice(4);
-			int choice3 = Utils::getChoice(2);
+			int choice1;
+			int sort_choice;
+			//int choice3 = Utils::getChoice(2);找不到choice3的定义，可能是之前的代码片段没有包含
 			string keyword;
 			alumni_list search_list;
 			switch (choice) {
@@ -46,6 +44,7 @@ public:
 					<< "3.排序方式\n"
 					<< "4.返回上一级\n"
 					<< "-------------------------\n";
+				choice1 = Utils::getChoice(4);
 				switch (choice1) {
 				case 1:
 					cout << "搜索：";
@@ -56,12 +55,14 @@ public:
 					}
 					else {
 						search_list.show_allowChange();
+						fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 					}
 					break;
 				case 2:
 					Filter.modify_alumniFilter();
 					Filter.show();//显示筛选条件
 					current_alumni_list.filter_show_allowChange(Filter);//筛选并显示校友信息
+					fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 					break;
 				case 3:
 					cout << "选项：\n"
@@ -70,7 +71,7 @@ public:
 						<< "3.按届级升序\n"
 						<< "4.按届级降序\n"
 						<< "-------------------------\n";
-
+					sort_choice = Utils::getChoice(4);
 					switch (sort_choice) {
 					case 1:
 						current_alumni_list.sort(alumni::Compare_by_name_up);
@@ -86,6 +87,7 @@ public:
 						break;
 					}
 					current_alumni_list.show_allowChange();
+					fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 					break;
 				case 4:
 					break;
@@ -98,53 +100,73 @@ public:
 					<< "1.修改密码\n"
 					<< "2.返回上一级\n"
 					<< "-------------------------\n";
+				choice2 = Utils::getChoice(2);
 				switch (choice2) {
 				case 1:
 					current_manager.modify_password();
+					fileManager::save_T_list("manager.txt", current_manager_list);
 					break;
 				case 2:
 					break;
 				}
+				break;
 			case 3:
 				cout << "选择账号类型：\n";
+				cout << endl;
+				cout << "-------------------------\n";
+				cout << "选项：\n";
 				cout << "1.校友账号\n";
 				cout << "2.管理员账号\n";
 				cout << "3.访客账号\n";
+				cout << "4.返回上一级\n";
+				cout << "-------------------------\n";
+				account_type = Utils::getChoice(4);
+				cout << "(注意：新账号的初始密码为123456)\n";
 				if (account_type == 1) {
 					cout << "请输入新校友账号信息：\n";
 					cout << "用户名：";
 					cin >> userName;
-					cout << "密码：";
-					cin >> password;
+					cin.clear(); // 清除输入缓冲区中的换行符
+					cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区中的换行符
+					password = Utils::modifyPassword("123456");
 					alumni new_alumni(userName, password, "", "", '\0', 0, 0, "", "", "", "", "", "", "");
 					new_alumni.create_information();
 					current_alumni_list.insert(new_alumni); // 将新校友添加到校友列表
+					cout << "创建成功！\n";
 				}
 				else if (account_type == 2) {
 					cout << "请输入新管理员账号信息：\n";
 					cout << "用户名：";
 					cin >> userName;
-					cout << "密码：";
-					cin >> password;
+					cin.clear(); // 清除错误标志
+					cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
+					password = Utils::modifyPassword("123456");
 					manager new_manager(userName, password);
 					current_manager_list.insert(new_manager);
+					cout << "创建成功！\n";
 				}
 				else if (account_type == 3) {
 					cout << "请输入新访客账号信息：\n";
 					cout << "用户名：";
 					cin >> userName;
-					cout << "密码：";
-					cin >> password;
+					cin.clear(); // 清除错误标志
+					cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
+					password = Utils::modifyPassword("123456");
 					visitor new_visitor(userName, password);
 					current_visitor_list.insert(new_visitor);
+					cout<< "创建成功！\n";
 				}
 				break;
 			case 4:
-				return;
+				fileManager::save_T_list("visitor.txt", current_visitor_list);
+				fileManager::save_T_list("manager.txt", current_manager_list);
+				fileManager::save_alumni_list("alumni.txt", current_alumni_list);
+				cout << "信息已保存！\n";
+				cout << "退出登录成功！\n";
+				break;
 			}
 		}
 	}
-
 private:
 	List<visitor> current_visitor_list;
 	List<manager> current_manager_list;

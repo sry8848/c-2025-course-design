@@ -21,15 +21,15 @@ class LoginSystem {
 	public:
 		void run() {
 			while (true) {
-				cout << "校友录管理系统V1.0\n"
-					<< "-------------------------\n"
+				cout << "\n校友录管理系统V1.0\n"
+					<< "------------------------------\n"
 					<< "请输入选项前的序号选择登录身份\n"
 					<< "1.我是学生\n"
 					<< "2.我是校友\n"
 					<< "3.我是访客\n"
 					<< "4.我是管理员\n"
 					<< "-1.退出系统\n"
-					<< "-------------------------\n";
+					<< "------------------------------\n";
 				int choice = Utils::getChoice(4);
 				while (true) {
 					cout << "请输入账号和密码：\n";
@@ -61,7 +61,6 @@ class LoginSystem {
 					switch (choice) {
 					case 1:
 						current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
-						cout << "学生登录\n";
 						if (current_visitor_list.count(current_visitor)) {
 							cout << "登录成功！\n";
 							VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
@@ -70,7 +69,6 @@ class LoginSystem {
 						break;
 					case 2:
 						current_alumni_list = fileManager::load_alumni_list("alumni.txt");
-						cout << "校友登录\n";
 						if (current_alumni_list.count(current_alumni)) {
 							cout << "登录成功！\n";
 							alumniModle alumniModle(current_alumni_list, current_alumni);//创建alumniModle对象
@@ -79,7 +77,6 @@ class LoginSystem {
 						break;
 					case 3:
 						current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");
-						cout << "访客登录\n";
 						if (current_visitor_list.count(current_visitor)) {
 							cout << "登录成功！\n";
 							VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
@@ -88,13 +85,15 @@ class LoginSystem {
 						break;
 					case 4:
 						current_manager_list = fileManager::load_T_list<manager>("manager.txt");
-						cout << "管理员登录\n";
 						if (current_manager_list.count(current_manager)) {
 							cout << "登录成功！\n";
 							managerModle managerModle(current_alumni_list, current_manager);//创建managerModle对象
 							managerModle.run();
 						}
 						break;
+					case -1:
+							cout << "退出系统！\n";
+							exit(0);
 					}
 					cout << "用户名或密码错误！\n"
 						<< "-------------------------\n"

@@ -108,4 +108,10 @@
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="manager.txt" />
+    <Text Include="visitor.txt" />
+    <Text Include="alumni.txt" />
+    <Text Include="department.txt" />
+  </ItemGroup>
 </Project>

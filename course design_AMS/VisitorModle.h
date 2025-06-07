@@ -7,7 +7,6 @@
 #include "alumni_list.h"
 #include <iostream>
 #include <cstdlib>
-#include "alumni_list.h"
 #include "VisitorModle.h"
 #include "alumniFilter.h"
 #include "department.h"
@@ -20,7 +19,7 @@ public:
 	}
 	void run() {
 		while (true) {
-			cout << "校友录管理系统V1.0\n"
+			cout << "\n校友录管理系统V1.0\n"
 				<< "-------------------------\n"
 				<< "选项：\n"
 				<< "1.查找校友\n"
@@ -30,9 +29,9 @@ public:
 			int choice = Utils::getChoice(3);
 			vector<Department> current_department_vector = fileManager::load_department_list("department.txt");
 			alumniFilter Filter(current_department_vector);
-			int choice1 = Utils::getChoice(4);
-			int choice2 = Utils::getChoice(4);
-			int choice3 = Utils::getChoice(2);
+			int choice1;
+			int choice2;
+			int choice3;
 			string keyword;
 			alumni_list search_list;
 			switch (choice) {
@@ -43,6 +42,7 @@ public:
 					<< "3.排序方式\n"
 					<< "4.返回上一级\n"
 					<< "-------------------------\n";
+				choice1 = Utils::getChoice(4);
 				switch (choice1) {
 				case 1:
 					cout << "搜索：";
@@ -67,7 +67,7 @@ public:
 						<< "3.按届级升序\n"
 						<< "4.按届级降序\n"
 						<< "-------------------------\n";
-
+					choice2 = Utils::getChoice(4);
 					switch (choice2) {
 					case 1:
 						current_alumni_list.sort(alumni::Compare_by_name_up);
@@ -95,7 +95,7 @@ public:
 					<< "1.修改密码\n"
 					<< "2.返回上一级\n"
 					<< "-------------------------\n";
-
+				choice3 = Utils::getChoice(2);
 				switch (choice3) {
 				case 1:
 					current_visitor.modify_password();

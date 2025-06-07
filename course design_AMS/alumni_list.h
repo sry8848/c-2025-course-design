@@ -76,6 +76,13 @@ public:
 	List() {
 		head = NULL;
 	}
+	List(const List<T>& other) : head(NULL) {//拷贝构造函数
+		Node* current = other.head;
+		while (current != NULL) {
+			insert(current->data);
+			current = current->next;
+		}
+	}
 	//template<typename T>
 	void clear() {
 		while (head != NULL) {
@@ -162,16 +169,15 @@ public:
 	}
 	//template<typename T>
 	List<T>& operator=(const List<T>& other) {
-		if (this == &other) {
-			return *this; // 防止自赋值
+		if (!(this == &other)) { // 防止自赋值
+			clear(); // 清空当前列表
+			Node* current = other.head;
+			while (current != NULL) {
+				insert(current->data); // 逐个插入其他列表的元素
+				current = current->next;
+			}
 		}
-		this->clear(); // 清空当前链表
-		Node* p1 = other.head;
-		while (p1 != NULL) {
-			insert(p1->data);
-			p1 = p1->next;
-		}
-		return *this;
+		return *this; // 返回当前对象的引用
 	}
 
 
