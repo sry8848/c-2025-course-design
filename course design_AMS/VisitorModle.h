@@ -13,8 +13,8 @@
 using namespace std;
 class VisitorModle {
 public:
-	VisitorModle(List<visitor> current_visitor_list,alumni_list current_alumni_list_, visitor current_visitor_) {
-		current_visitor_list = current_visitor_list;
+	VisitorModle(List<visitor> current_visitor_list_,alumni_list current_alumni_list_, visitor current_visitor_) {
+		current_visitor_list = current_visitor_list_;
 		current_alumni_list = current_alumni_list_;
 		current_visitor = current_visitor_;
 	}

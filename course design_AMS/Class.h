@@ -4,7 +4,7 @@
 #include <vector>
 class Class {
 public:
-	Class(std::string classNumber_ = "0000") : ClassNumber(classNumber_) {} // 默认班级号为"0000"
+	Class(std::string classNumber_ = "00") : ClassNumber(classNumber_) {} // 默认班级号为"00"
 	void setClassNumber(const std::string& num) {
 		ClassNumber = num;
 	}

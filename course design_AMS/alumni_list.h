@@ -648,7 +648,6 @@ public:
 			if (alumniList.head == nullptr || alumniList.head->next == nullptr) {
 				return;
 			}
-
 			// 使用auto但正确初始化
 			auto sorted = decltype(alumniList.head)(nullptr);
 		    auto curr = alumniList.head;  // 当前待排序节点

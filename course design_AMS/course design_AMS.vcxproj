@@ -29,7 +29,6 @@
     <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="managerModle.cpp" />
-    <ClCompile Include="menu.h" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="visitor.cpp" />
@@ -47,7 +46,6 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="managerModle.h" />
     <ClInclude Include="person.h" />
-    <ClInclude Include="test.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="visitor.h" />
     <ClInclude Include="VisitorModle.h" />

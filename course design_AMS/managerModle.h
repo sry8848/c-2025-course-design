@@ -11,8 +11,8 @@
 using namespace std;
 class managerModle {
 public:
-	managerModle(List<visitor> current_visitor_list,List<manager> current_manager_list, alumni_list current_alumni_list_, manager current_manager_) {
-		current_visitor_list = current_visitor_list;
+	managerModle(List<visitor> current_visitor_list_,List<manager> current_manager_list, alumni_list current_alumni_list_, manager current_manager_) {
+		current_visitor_list = current_visitor_list_;
 		current_manager_list = current_manager_list;
 		current_alumni_list = current_alumni_list_;
 		current_manager = current_manager_;
@@ -140,6 +140,7 @@ public:
 					alumni new_alumni(userName, password, "", "", '\0', 0, 0, "", "", "", "", "", "", "");
 					new_alumni.create_information();
 					current_alumni_list.insert(new_alumni); // 将新校友添加到校友列表
+					fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 					cout << "创建成功！\n";
 				}
 				else if (account_type == 2) {
@@ -151,6 +152,7 @@ public:
 					password = Utils::modifyPassword("123456");
 					manager new_manager(userName, password);
 					current_manager_list.insert(new_manager);
+					fileManager::save_T_list("manager.txt", current_manager_list);
 					cout << "创建成功！\n";
 				}
 				else if (account_type == 3) {
@@ -162,6 +164,7 @@ public:
 					password = Utils::modifyPassword("123456");
 					visitor new_visitor(userName, password);
 					current_visitor_list.insert(new_visitor);
+					fileManager::save_T_list("visitor.txt", current_visitor_list);
 					cout<< "创建成功！\n";
 				}
 				break;
@@ -171,7 +174,7 @@ public:
 				fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 				cout << "信息已保存！\n";
 				cout << "退出登录成功！\n";
-				break;
+				return;
 			}
 		}
 	}

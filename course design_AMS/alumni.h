@@ -277,10 +277,10 @@ public:
 		return left.year_of_graduation < right.year_of_graduation;
 	}
 	static bool Compare_by_name_up(const alumni& left, const alumni& right) {
-		return left.pinyin > right.pinyin;
+		return left.pinyin < right.pinyin;
 	}
 	static bool Compare_by_name_down(const alumni& left, const alumni& right) {
-		return left.pinyin < right.pinyin;
+		return left.pinyin > right.pinyin;
 	}
 
 private:

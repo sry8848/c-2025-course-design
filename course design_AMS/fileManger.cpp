@@ -1,3 +1,5 @@
+/*
+
 #pragma once//头文件保护，防止重复包含
 //不建议头文件包含#include<iostream>，而是使用
 #include <string>//用到string就包含此头文件
@@ -11,7 +13,7 @@
 #include "fileManager.h"
 using namespace std;
 
-/*
+
 * 
 * 
 void fileManager::save_alumni_list(const string& fileName, const alumni_list& alumniList){// 保存校友列表到文件 
