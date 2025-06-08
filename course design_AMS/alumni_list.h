@@ -1,27 +1,27 @@
-/*
+ï»¿/*
 
 //alumni_list.h
 #pragma once
 
-// ÏÈ°üº¬alumniµÄÍêÕû¶¨Òå
+// å…ˆåŒ…å«alumniçš„å®Œæ•´å®šä¹‰
 #include "alumni.h"
 #include "visitor.h"
 
-// ÔÙ°üº¬ÒÀÀµalumniµÄÄ£°å
+// å†åŒ…å«ä¾èµ–alumniçš„æ¨¡æ¿
 #include "myList.h"
 
-// ×îºó°üº¬ÆäËûÒÀÀµ
+// æœ€ååŒ…å«å…¶ä»–ä¾èµ–
 #include "alumniFilter.h"
 class alumni_list{
 public:
 	alumni_list(){}
 	//alumni_list(List<alumni>& alumniList_) :alumniList(alumniList_) {}
-	void sort(bool (*Compare)(const alumni& val1, const alumni& val2));//²åÈëÅÅĞò£¬ÔÚÔ­Á´±íÖĞ²åÈëÅÅĞò
-	void show()const;//·ÖÒ³Õ¹Ê¾
-	void filter_show(const alumniFilter& filter)const;//É¸Ñ¡Õ¹Ê¾
-	void show_allowChange();//ÔÊĞíĞŞ¸ÄµÄÕ¹Ê¾
-	void filter_show_allowChange(const alumniFilter& alumniFilter);//ÔÊĞíĞŞ¸ÄµÄÉ¸Ñ¡Õ¹Ê¾
-	alumni_list search_form_line(const std::string& keyword) const;//ËÑË÷¹¦ÄÜ£¬·µ»ØÒ»¸öĞÂµÄalumni_list
+	void sort(bool (*Compare)(const alumni& val1, const alumni& val2));//æ’å…¥æ’åºï¼Œåœ¨åŸé“¾è¡¨ä¸­æ’å…¥æ’åº
+	void show()const;//åˆ†é¡µå±•ç¤º
+	void filter_show(const alumniFilter& filter)const;//ç­›é€‰å±•ç¤º
+	void show_allowChange();//å…è®¸ä¿®æ”¹çš„å±•ç¤º
+	void filter_show_allowChange(const alumniFilter& alumniFilter);//å…è®¸ä¿®æ”¹çš„ç­›é€‰å±•ç¤º
+	alumni_list search_form_line(const std::string& keyword) const;//æœç´¢åŠŸèƒ½ï¼Œè¿”å›ä¸€ä¸ªæ–°çš„alumni_list
 private:
 	List<int> alumniList;
 };
@@ -31,15 +31,15 @@ private:
 //alumni_list.h
 #pragma once
 
-// ÏÈ°üº¬alumniµÄÍêÕû¶¨Òå
+// å…ˆåŒ…å«alumniçš„å®Œæ•´å®šä¹‰
 #include "alumni.h"
 //myList.h
-#pragma once//Í·ÎÄ¼ş±£»¤£¬·ÀÖ¹ÖØ¸´°üº¬
+#pragma once//å¤´æ–‡ä»¶ä¿æŠ¤ï¼Œé˜²æ­¢é‡å¤åŒ…å«
 #include <cstdlib>
 #include "fileManager.h"
-// ×îºó°üº¬ÆäËûÒÀÀµ
+// æœ€ååŒ…å«å…¶ä»–ä¾èµ–
 #include "alumniFilter.h"
-#include <string>//ÓÃµ½std::string¾Í°üº¬´ËÍ·ÎÄ¼ş
+#include <string>//ç”¨åˆ°std::stringå°±åŒ…å«æ­¤å¤´æ–‡ä»¶
 #include "person.h"
 #include <iostream>
 #include <cstdlib>
@@ -62,12 +62,12 @@ using namespace std;
 template <typename T> class List;
 class alumni_list;
 class alumniFilter;
-class Department;//Ìí¼ÓÇ°ÏòÉùÃ÷£¬±ÜÃâÑ­»·ÒÀÀµ£¡£¡
+class Department;//æ·»åŠ å‰å‘å£°æ˜ï¼Œé¿å…å¾ªç¯ä¾èµ–ï¼ï¼
 
 template<typename T>
 class List {
 public:
-	struct Node {//Node½á¹¹ÌåĞè¶¨ÒåÔÚIteratorÀàÖ®Ç°£¬·ñÔò»á±¨´í
+	struct Node {//Nodeç»“æ„ä½“éœ€å®šä¹‰åœ¨Iteratorç±»ä¹‹å‰ï¼Œå¦åˆ™ä¼šæŠ¥é”™
 		T data;
 		Node* next = NULL;
 	};
@@ -76,7 +76,7 @@ public:
 	List() {
 		head = NULL;
 	}
-	List(const List<T>& other) : head(NULL) {//¿½±´¹¹Ôìº¯Êı
+	List(const List<T>& other) : head(NULL) {//æ‹·è´æ„é€ å‡½æ•°
 		Node* current = other.head;
 		while (current != NULL) {
 			insert(current->data);
@@ -98,7 +98,7 @@ public:
 	//template<typename T>
 	void insert(const T& val) {
 		Node* temp = head;
-		head = new Node;//ÄÚ´æ·ÖÅäÊ§°Ü»áÏµÍ³×Ô¼º±ÀÀ££¬²»ÓÃ¹ı¶à´¦Àí
+		head = new Node;//å†…å­˜åˆ†é…å¤±è´¥ä¼šç³»ç»Ÿè‡ªå·±å´©æºƒï¼Œä¸ç”¨è¿‡å¤šå¤„ç†
 		if (head != NULL) {
 			head->data = val;
 			head->next = temp;
@@ -120,7 +120,7 @@ public:
 			Node* p2 = head;
 			for (int i = 2; i < num; ++i) {
 				if (p1->next != NULL) {
-					p1 = p1->next;//p1ÎªÉ¾³ı½áµãÇ°Ò»¸ö½áµã
+					p1 = p1->next;//p1ä¸ºåˆ é™¤ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
 				}
 				else {
 					std::cerr << "out of range\n";
@@ -161,28 +161,28 @@ public:
 		Node* p1 = head;
 		while (p1 != NULL) {
 			if (p1->data == val) {
-				return true; // ÕÒµ½ÔªËØ£¬·µ»Øtrue
+				return true; // æ‰¾åˆ°å…ƒç´ ï¼Œè¿”å›true
 			}
 			p1 = p1->next;
 		}
-		return false; // Ã»ÓĞÕÒµ½ÔªËØ£¬·µ»Øfalse
+		return false; // æ²¡æœ‰æ‰¾åˆ°å…ƒç´ ï¼Œè¿”å›false
 	}
 	//template<typename T>
 	List<T>& operator=(const List<T>& other) {
-		if (!(this == &other)) { // ·ÀÖ¹×Ô¸³Öµ
-			clear(); // Çå¿Õµ±Ç°ÁĞ±í
+		if (!(this == &other)) { // é˜²æ­¢è‡ªèµ‹å€¼
+			clear(); // æ¸…ç©ºå½“å‰åˆ—è¡¨
 			Node* current = other.head;
 			while (current != NULL) {
-				insert(current->data); // Öğ¸ö²åÈëÆäËûÁĞ±íµÄÔªËØ
+				insert(current->data); // é€ä¸ªæ’å…¥å…¶ä»–åˆ—è¡¨çš„å…ƒç´ 
 				current = current->next;
 			}
 		}
-		return *this; // ·µ»Øµ±Ç°¶ÔÏóµÄÒıÓÃ
+		return *this; // è¿”å›å½“å‰å¯¹è±¡çš„å¼•ç”¨
 	}
 
 
 
-	//µü´úÆ÷
+	//è¿­ä»£å™¨
 	class Iterator {
 	public:
 		Iterator(Node* node) : current(node) {}
@@ -193,7 +193,7 @@ public:
 	private:
 		Node* current;
 	};
-	Iterator begin() const { return Iterator(head); }//ĞèÒª¶¨ÒåÔÚIteratorÀàÍâ£¬·ñÔò»á±¨´í
+	Iterator begin() const { return Iterator(head); }//éœ€è¦å®šä¹‰åœ¨Iteratorç±»å¤–ï¼Œå¦åˆ™ä¼šæŠ¥é”™
 	Iterator end() const { return Iterator(nullptr); }
 };
 //template class List<alumni>;
@@ -204,12 +204,12 @@ public:
 
 
 
-	class alumniFilter {//ĞèfilemanagerºÍalumni
+	class alumniFilter {//éœ€filemanagerå’Œalumni
 	public:
-		//ÒÑÔÚ¶¨ÒåÖĞ³õÊ¼»¯³ÉÔ±±äÁ¿£¬²»ĞèÒª¹¹Ôìº¯ÊıÀ´ÔÙ´Î³õÊ¼»¯£¬·ñÔò±¨´íÒÑÓĞÖ÷Ìå¶¨Òå
-		//Îö¹¹º¯Êı²»ĞèÒª×öÊ²Ã´£¬ÒòÎª³ÉÔ±±äÁ¿ÊÇÖµÀàĞÍ£¬×Ô¶¯ÊÍ·Å
-		//Èç¹û³ÉÔ±±äÁ¿ÊÇÖ¸ÕëÀàĞÍ£¬ÔòĞèÒªÊÖ¶¯ÊÍ·ÅÄÚ´æ
-		alumniFilter(const vector<Department>& department_list_):department_list(department_list_){}//³£ÒıÓÃ½ö´«Öµ
+		//å·²åœ¨å®šä¹‰ä¸­åˆå§‹åŒ–æˆå‘˜å˜é‡ï¼Œä¸éœ€è¦æ„é€ å‡½æ•°æ¥å†æ¬¡åˆå§‹åŒ–ï¼Œå¦åˆ™æŠ¥é”™å·²æœ‰ä¸»ä½“å®šä¹‰
+		//ææ„å‡½æ•°ä¸éœ€è¦åšä»€ä¹ˆï¼Œå› ä¸ºæˆå‘˜å˜é‡æ˜¯å€¼ç±»å‹ï¼Œè‡ªåŠ¨é‡Šæ”¾
+		//å¦‚æœæˆå‘˜å˜é‡æ˜¯æŒ‡é’ˆç±»å‹ï¼Œåˆ™éœ€è¦æ‰‹åŠ¨é‡Šæ”¾å†…å­˜
+		alumniFilter(const vector<Department>& department_list_):department_list(department_list_){}//å¸¸å¼•ç”¨ä»…ä¼ å€¼
 		alumniFilter(const alumniFilter& other)
 			: gender(other.gender),
 			year_of_graduation(other.year_of_graduation),
@@ -231,41 +231,58 @@ public:
 		}
 		void modify_alumniFilter() {
 			while (true) {
-				cout << "É¸Ñ¡Ìõ¼ş£º\n 1.ĞÔ±ğ\n 2.±ÏÒµÄê·İ\n 3.Ïµ/×¨Òµ/°à¼¶\n 4.·µ»ØÉÏÒ»¼¶\n";
+				cout << "ç­›é€‰æ¡ä»¶(æœªä¸»åŠ¨é€‰æ‹©æ¡ä»¶çš„ç±»åˆ«é»˜è®¤å…¨é€‰)ï¼š\n 1.æ€§åˆ«\n 2.æ¯•ä¸šå¹´ä»½\n 3.ç³»/ä¸“ä¸š/ç­çº§\n 4.ç¡®è®¤é€‰æ‹©\n";
 				int choice = Utils::getChoice(4);
 				string choices;
 				vector<int> years;
-				//vector<Department> department_list;//Ğ¡ĞÄdepartmentÓëalumni.department³åÍ»//ĞŞ¸ÄÎªÀà³ÉÔ±
+				//vector<Department> department_list;//å°å¿ƒdepartmentä¸alumni.departmentå†²çª//ä¿®æ”¹ä¸ºç±»æˆå‘˜
 				int gender_choice;
 				time_t t = time(0);
-				tm now;  // ¶¨Òå±¾µØ±äÁ¿´æ´¢Ê±¼äĞÅÏ¢
-				// Ê¹ÓÃÏß³Ì°²È«µÄ localtime_s Ìæ´ú localtime
+				tm now;  // å®šä¹‰æœ¬åœ°å˜é‡å­˜å‚¨æ—¶é—´ä¿¡æ¯
+				// ä½¿ç”¨çº¿ç¨‹å®‰å…¨çš„ localtime_s æ›¿ä»£ localtime
 				if (localtime_s(&now, &t) == 0) {
-					// ³É¹¦»ñÈ¡±¾µØÊ±¼ä£¬¿É²Ù×÷ now ½á¹¹Ìå
+					// æˆåŠŸè·å–æœ¬åœ°æ—¶é—´ï¼Œå¯æ“ä½œ now ç»“æ„ä½“
 				}
 				else {
-					// ´¦Àí´íÎó
+					// å¤„ç†é”™è¯¯
 				}
 				int current_year;
 				int current_month = now.tm_mon + 1;
 				int year = 2010;
 				int count = 1;
 				int year_choice;
-				int department_choice = Utils::getChoice(3);
+				int department_choice;
 				int dep_choice;
 				int maj_choice;
 				int class_choice;
-				int continue_choice = Utils::getChoice(2);
+				int continue_choice;
+				bool isM = 0, isW = 0;
+				std::set<int> selected_years_set;
 				switch (choice) {
 				case 1:
-					cout << "ĞÔ±ğÉ¸Ñ¡(ÊäÈëĞòºÅ£¬¿É¶àÑ¡»ò²»Ñ¡£¬ÊäÈë»Ø³µÈ·ÈÏ£¬Ê¾ÀıÊäÈë£º1 2)£º\n 1.ÄĞ\n 2.Å®\n";
-					while (gender_choice = Utils::getChoice(2)) {
-						if (gender_choice == 0) break; // Èç¹ûÊäÈë0ÔòÍË³öÑ¡Ôñ
-						else if (gender_choice == 1) {
-							gender.genders.push_back('M'); // ½«Ñ¡ÔñµÄĞÔ±ğÌí¼Óµ½É¸Ñ¡Ìõ¼şÖĞ
+					cout << "æ€§åˆ«ç­›é€‰(è¾“å…¥åºå·ï¼Œåˆ‡æ¢é€‰æ‹©çŠ¶æ€ï¼Œè¾“å…¥0ç»“æŸè¾“å…¥ï¼Œç¤ºä¾‹è¾“å…¥ï¼š1)ï¼š\n 1.ç”·\n 2.å¥³\n";
+					while (gender_choice = Utils::getChoice_0stop(2)) {
+						if (gender_choice == 1) {
+							auto it = find(gender.genders.begin(), gender.genders.end(), 'M');
+							if (it == gender.genders.end()) {
+								gender.genders.push_back('M'); // æ·»åŠ 
+								cout << "é€‰ä¸­ï¼šç”·\n";
+							}
+							else {
+								gender.genders.erase(it);      // ç§»é™¤
+								cout << "å–æ¶ˆé€‰ä¸­ï¼šç”·\n";
+							}
 						}
 						else if (gender_choice == 2) {
-							gender.genders.push_back('W'); // ½«Ñ¡ÔñµÄĞÔ±ğÌí¼Óµ½É¸Ñ¡Ìõ¼şÖĞ
+							auto it = find(gender.genders.begin(), gender.genders.end(), 'W');
+							if (it == gender.genders.end()) {
+								gender.genders.push_back('W'); // æ·»åŠ 
+								cout << "é€‰ä¸­ï¼šå¥³\n";
+							}
+							else {
+								gender.genders.erase(it);      // ç§»é™¤
+								cout << "å–æ¶ˆé€‰ä¸­ï¼šå¥³\n";
+							}
 						}
 					}
 					if (gender.genders.size() == 0) {
@@ -276,7 +293,7 @@ public:
 					}
 					break;
 				case 2:
-					if (current_month >= 7) {//Èç¹ûµ±Ç°ÔÂ·İ´óÓÚµÈÓÚ7ÔÂ£¬Ôò±ÏÒµÄê·İÎªµ±Ç°Äê·İ
+					if (current_month >= 7) {//å¦‚æœå½“å‰æœˆä»½å¤§äºç­‰äº7æœˆï¼Œåˆ™æ¯•ä¸šå¹´ä»½ä¸ºå½“å‰å¹´ä»½
 						current_year = now.tm_year + 1900;
 					}
 					else {
@@ -288,11 +305,38 @@ public:
 						year++;
 						count++;
 					}
-					cout << "±ÏÒµÄê·İÉ¸Ñ¡(ÊäÈëĞòºÅ£¬¿É¶àÑ¡»ò²»Ñ¡£¬ÊäÈë0È·ÈÏ£¬Ê¾ÀıÊäÈë£º1 2)£º\n";
-					while (year_choice = Utils::getChoice(years.size())) {//Ó¦¸Ã»á±¨´í£¬ÒòÎªgetChoice»áÇå³ı»º³åÇø
-						if (year_choice == 0) break; // Èç¹ûÊäÈë0ÔòÍË³öÑ¡Ôñ
-						year_of_graduation.years_of_graduation.push_back(years[year_choice - 1]);// ½«Ñ¡ÔñµÄÄê·İÌí¼Óµ½É¸Ñ¡Ìõ¼şÖĞ
+					cout << "æ¯•ä¸šå¹´ä»½ç­›é€‰(è¾“å…¥åºå·,åˆ‡æ¢é€‰æ‹©çŠ¶æ€,è¾“å…¥0ç»“æŸè¾“å…¥ï¼Œç¤ºä¾‹è¾“å…¥ï¼š1)ï¼š\n";
+					while (true) {
+						year_choice = Utils::getChoice_0stop(years.size()); // è·å–ç”¨æˆ·è¾“å…¥
+						if (year_choice == 0) break;                 // è¾“å…¥0é€€å‡º
+
+						int selected_year = years[year_choice - 1];   // è·å–å®é™…å¹´ä»½
+						auto it = selected_years_set.find(selected_year);//setæ˜¯é›†åˆ
+
+						// åˆ‡æ¢é€‰ä¸­çŠ¶æ€
+						if (it == selected_years_set.end()) {
+							selected_years_set.insert(selected_year); // æœªé€‰ä¸­ â†’ æ·»åŠ 
+							cout << "å·²é€‰ä¸­å¹´ä»½: " << selected_year << endl;
+						}
+						else {
+							selected_years_set.erase(it);            // å·²é€‰ä¸­ â†’ ç§»é™¤
+							cout << "å·²å–æ¶ˆå¹´ä»½: " << selected_year << endl;
+						}
+
+						// å®æ—¶æ˜¾ç¤ºå½“å‰å·²é€‰å¹´ä»½
+						cout << "å½“å‰å·²é€‰: ";
+						for (int year : selected_years_set) {
+							cout << year << " ";
+						}
+						cout << endl;
 					}
+
+					// å°†æœ€ç»ˆç»“æœä¿å­˜åˆ° year_of_graduation
+					year_of_graduation.years_of_graduation.assign(
+						selected_years_set.begin(),
+						selected_years_set.end()
+					);
+
 					if (year_of_graduation.years_of_graduation.size() == 0) {
 						year_of_graduation.is_filtered = false;
 					}
@@ -301,104 +345,213 @@ public:
 					}
 					break;
 				case 3:
-					//department_list = fileManager::load_department_list("department.txt");¸ÕĞèfilemanagerµÄÔ­Òò
-					cout << "Ïµ/×¨Òµ/°à¼¶É¸Ñ¡(ÊäÈëĞòºÅ£¬¿É¶àÑ¡»ò²»Ñ¡£¬°´»Ø³µÈ·ÈÏÑ¡Ôñ)£º\n 1.Ïµ\n 2.×¨Òµ\n 3.°à¼¶\n";
-
-					if (department_choice == 1) {
-						cout << "ÇëÑ¡ÔñÏµ£º\n";
-						for (size_t i = 0; i < department_list.size(); ++i) {//´òÓ¡ÏµÁĞ±í£¬Ê¹ÓÃsize_tÊÇÒòÎªdepartment_list.size()·µ»ØµÄÊÇsize_tÀàĞÍ£¬±ÜÃâÓÃintµ¼ÖÂ¾¯¸æ
-							cout << setfill('0') << setw(2) << i + 1 << " " << department_list[i].getDepartmentName() << endl;
-						}
-						while (dep_choice = Utils::getChoice(department_list.size())) {//»ñÈ¡ÓÃ»§Ñ¡ÔñµÄÏµ
-							department.departments.push_back(department_list[dep_choice - 1].getDepartmentName());
-						}
-						if (department.departments.size() == 0) {
-							department.is_filtered = false;
-						}
-						else {
-							department.is_filtered = true;
-						}
-					}
-					else if (department_choice == 2) {
-						cout << "ÇëÑ¡ÔñÏµ(µ¥Ñ¡)£º\n";//ÏÈÑ¡ÔñÏµ£¬È»ºóÕ¹¿ª×¨Òµ
+					//department_list = fileManager::load_department_list("department.txt");ä»¥ä½œä¸ºæˆå‘˜å­˜åœ¨
+					cout << "ç³»/ä¸“ä¸š/ç­çº§ç­›é€‰(è¾“å…¥åºå·,é€‰æ‹©ç­›é€‰æ¡ä»¶)ï¼š\n 1.ç³»\n 2.ä¸“ä¸š\n 3.ç­çº§\n";
+					department_choice = Utils::getChoice(3);
+					switch (department_choice) {
+					case 1: { // ç³»ç­›é€‰
+						cout << "è¯·é€‰æ‹©ç³»ï¼ˆè¾“å…¥åºå·åˆ‡æ¢é€‰æ‹©çŠ¶æ€ï¼Œè¾“å…¥0ç»“æŸï¼‰ï¼š\n";
 						for (size_t i = 0; i < department_list.size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " " << department_list[i].getDepartmentName() << endl;
-						}
-						dep_choice = Utils::getChoice(department_list.size());
-						Department curDept = department_list[dep_choice - 1];
-						cout << "ÇëÑ¡Ôñ×¨Òµ£º\n";
-						for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " " << curDept.getMajorList()[i].getMajorName() << endl;
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< department_list[i].getDepartmentName() << endl;
 						}
 
-						while (maj_choice = Utils::getChoice(department_list.size())) {
-							major.majors.push_back(curDept.getMajorList()[maj_choice - 1].getMajorName());
+						while (true) {
+							dep_choice = Utils::getChoice_0stop(department_list.size());
+							if (dep_choice == 0) break;
+
+							const string& dept = department_list[dep_choice - 1].getDepartmentName();//ç›¸å½“äºdefineå­—ç¬¦æ›¿æ¢
+							auto it = find(department.departments.begin(), department.departments.end(), dept);
+
+							if (it == department.departments.end()) {
+								department.departments.push_back(dept);
+								cout << "å·²é€‰ä¸­ç³»: " << dept << endl;
+							}
+							else {
+								department.departments.erase(it);
+								cout << "å·²å–æ¶ˆç³»: " << dept << endl;
+							}
+
+							cout << "å½“å‰å·²é€‰: ";
+							for (const auto& d : department.departments) cout << d << " ";
+							cout << endl;
 						}
-						if (major.majors.size() == 0) {
-							major.is_filtered = false;
-						}
-						else {
-							major.is_filtered = true;
-						}
+						department.is_filtered = !department.departments.empty();
+						break;
 					}
-					else if (department_choice == 3) {
-						cout << "ÇëÑ¡ÔñÏµ(µ¥Ñ¡)£º\n";//ÏÈÑ¡ÔñÏµ£¬È»ºóÕ¹¿ª×¨Òµ
+					case 2: { // ä¸“ä¸šç­›é€‰
+						cout << "è¯·å…ˆé€‰æ‹©ç³»ï¼ˆå•é€‰ï¼‰ï¼š\n";
 						for (size_t i = 0; i < department_list.size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " " << department_list[i].getDepartmentName() << endl;
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< department_list[i].getDepartmentName() << endl;
 						}
 
 						dep_choice = Utils::getChoice(department_list.size());
-						Department curDept = department_list[dep_choice - 1];
-						cout << "ÇëÑ¡Ôñ×¨Òµ£º\n";
+						Department& curDept = department_list[dep_choice - 1];
+
+						cout << "è¯·é€‰æ‹©ä¸“ä¸šï¼ˆè¾“å…¥åºå·åˆ‡æ¢é€‰æ‹©çŠ¶æ€ï¼Œè¾“å…¥0ç»“æŸï¼‰ï¼š\n";
 						for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " " << curDept.getMajorList()[i].getMajorName() << endl;
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< curDept.getMajorList()[i].getMajorName() << endl;
 						}
 
+						while (true) {
+							maj_choice = Utils::getChoice_0stop(curDept.getMajorList().size());
+							if (maj_choice == 0) break;
+
+							const string& maj = curDept.getMajorList()[maj_choice - 1].getMajorName();
+							auto it = find(major.majors.begin(), major.majors.end(), maj);
+
+							if (it == major.majors.end()) {
+								major.majors.push_back(maj);
+								cout << "å·²é€‰ä¸­ä¸“ä¸š: " << maj << endl;
+							}
+							else {
+								major.majors.erase(it);
+								cout << "å·²å–æ¶ˆä¸“ä¸š: " << maj << endl;
+							}
+
+							cout << "å½“å‰å·²é€‰: ";
+							for (const auto& m : major.majors) cout << m << " ";
+							cout << endl;
+						}
+						major.is_filtered = !major.majors.empty();
+						break;
+					}
+					case 3: { // ç­çº§ç­›é€‰
+						cout << "è¯·å…ˆé€‰æ‹©ç³»ï¼ˆå•é€‰ï¼‰ï¼š\n";
+						for (size_t i = 0; i < department_list.size(); ++i) {
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< department_list[i].getDepartmentName() << endl;
+						}
+
+						dep_choice = Utils::getChoice(department_list.size());
+						Department& curDept = department_list[dep_choice - 1];
+
+						cout << "è¯·é€‰æ‹©ä¸“ä¸šï¼ˆå•é€‰ï¼‰ï¼š\n";
+						for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< curDept.getMajorList()[i].getMajorName() << endl;
+						}
 						maj_choice = Utils::getChoice(curDept.getMajorList().size());
-						Major curMajor = curDept.getMajorList()[maj_choice - 1];
-						cout << "ÇëÑ¡Ôñ°à¼¶£º\n";
-						for (size_t i = 0; i < curMajor.getClassList().size(); ++i) {//´òÓ¡°à¼¶ÁĞ±í
-							cout << setfill('0') << setw(2) << i + 1 << " " << curMajor.getClassList()[i].getClassNumber() << endl;
+						Major& curMajor = curDept.getMajorList()[maj_choice - 1];
+
+						cout << "è¯·é€‰æ‹©ç­çº§ï¼ˆè¾“å…¥åºå·åˆ‡æ¢é€‰æ‹©çŠ¶æ€ï¼Œè¾“å…¥0ç»“æŸï¼‰ï¼š\n";
+						for (size_t i = 0; i < curMajor.getClassList().size(); ++i) {
+							cout << setfill('0') << setw(2) << i + 1 << " "
+								<< curMajor.getClassList()[i].getClassNumber() << endl;
 						}
 
-						while (class_choice = Utils::getChoice(department_list.size())) {//
-							Class.Classes.push_back(curMajor.getClassList()[class_choice - 1].getClassNumber());
+						while (true) {
+							class_choice = Utils::getChoice_0stop(curMajor.getClassList().size());
+							if (class_choice == 0) break;
+
+							const string& cls = curMajor.getClassList()[class_choice - 1].getClassNumber();
+							auto it = find(Class.Classes.begin(), Class.Classes.end(), cls);
+
+							if (it == Class.Classes.end()) {
+								Class.Classes.push_back(cls);
+								cout << "å·²é€‰ä¸­ç­çº§: " << cls << endl;
+							}
+							else {
+								Class.Classes.erase(it);
+								cout << "å·²å–æ¶ˆç­çº§: " << cls << endl;
+							}
+
+							cout << "å½“å‰å·²é€‰: ";
+							for (const auto& c : Class.Classes) cout << c << " ";
+							cout << endl;
 						}
-						if (Class.Classes.size() == 0) {
-							Class.is_filtered = false;
-						}
-						else {
-							Class.is_filtered = true;
-						}
+						Class.is_filtered = !Class.Classes.empty();
+						break;
 					}
-					break;
+					}
+						case 4:
+							return;
 				}
-				cout << "ÊÇ·ñ¼ÌĞøÉ¸Ñ¡£¿\n 1.ÊÇ\n 2.·ñ\n";
-
-				if (continue_choice == 2) {
-					break;
-				}
-				//´ı²¹³äÏµ£¬×¨Òµ£¬ºÍ°à¼¶
 			}
 		}
 		void show() {
-			cout << "É¸Ñ¡Ìõ¼ş£º\n";
-			cout << "ĞÔ±ğ£º";
-			std::sort(gender.genders.begin(), gender.genders.end());
-			for (auto it = gender.genders.begin(); it != gender.genders.end(); ++it) {
-				if (*it == 'M') {
-					cout << "ÄĞ\n";
-				}
-				else if (*it == 'W') {
-					cout << "Å®\n";
+			cout << "ç­›é€‰æ¡ä»¶ï¼š\n";
+			cout << "æ€§åˆ«ï¼š";
+			if (gender.genders.empty()) {
+				cout << "æœªè®¾ç½®";
+			}
+			else {
+				std::sort(gender.genders.begin(), gender.genders.end());
+				bool first = true;
+				for (char g : gender.genders) {
+					if (!first) cout << "ã€";
+					cout << (g == 'M' ? "ç”·" : "å¥³");
+					first = false;
 				}
 			}
 			cout << endl;
-			cout << "±ÏÒµÄê·İ£º\n";
-			std::sort(year_of_graduation.years_of_graduation.begin(), year_of_graduation.years_of_graduation.end());
-			for (auto it = year_of_graduation.years_of_graduation.begin(); it != year_of_graduation.years_of_graduation.end(); ++it) {
-				cout << *it << " ";
+
+			// 2. æ¯•ä¸šå¹´ä»½ç­›é€‰æ¡ä»¶
+			cout << "æ¯•ä¸šå¹´ä»½ï¼š";
+			if (year_of_graduation.years_of_graduation.empty()) {
+				cout << "æœªè®¾ç½®";
 			}
+			else {
+				std::sort(year_of_graduation.years_of_graduation.begin(),
+					year_of_graduation.years_of_graduation.end());
+				bool first = true;
+				for (int year : year_of_graduation.years_of_graduation) {
+					if (!first) cout << "ã€";
+					cout << year;
+					first = false;
+				}
+			}
+			cout << endl;
+
+			// 3. ç³»ç­›é€‰æ¡ä»¶
+			cout << "ç³»ï¼š";
+			if (department.departments.empty()) {
+				cout << "æœªè®¾ç½®";
+			}
+			else {
+				std::sort(department.departments.begin(), department.departments.end());
+				bool first = true;
+				for (const auto& dept : department.departments) {
+					if (!first) cout << "ã€";
+					cout << dept;
+					first = false;
+				}
+			}
+			cout << endl;
+
+			// 4. ä¸“ä¸šç­›é€‰æ¡ä»¶
+			cout << "ä¸“ä¸šï¼š";
+			if (major.majors.empty()) {
+				cout << "æœªè®¾ç½®";
+			}
+			else {
+				std::sort(major.majors.begin(), major.majors.end());
+				bool first = true;
+				for (const auto& maj : major.majors) {
+					if (!first) cout << "ã€";
+					cout << maj;
+					first = false;
+				}
+			}
+			cout << endl;
+
+			// 5. ç­çº§ç­›é€‰æ¡ä»¶
+			cout << "ç­çº§ï¼š";
+			if (Class.Classes.empty()) {
+				cout << "æœªè®¾ç½®";
+			}
+			else {
+				std::sort(Class.Classes.begin(), Class.Classes.end());
+				bool first = true;
+				for (const auto& cls : Class.Classes) {
+					if (!first) cout << "ã€";
+					cout << cls;
+					first = false;
+				}
+			}
+			cout << endl;
 			cout << endl;
 		}
 		bool filter(const alumni& falumni) const {
@@ -407,8 +560,8 @@ public:
 					if (falumni.getGender() == gender.genders[i]) {
 						break;
 					}
-					if (gender.genders.size() - 1) {
-						return false; //Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬Ôò·µ»Øfalse
+					if (i == gender.genders.size() - 1) {
+						return false; //å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œåˆ™è¿”å›false
 					}
 				}
 			}
@@ -417,8 +570,8 @@ public:
 					if (falumni.getGraduationYear() == year_of_graduation.years_of_graduation[i]) {
 						break;
 					}
-					if (year_of_graduation.years_of_graduation.size() - 1) {
-						return false; //Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬Ôò·µ»Øfalse
+					if (i==year_of_graduation.years_of_graduation.size() - 1) {
+						return false; //å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œåˆ™è¿”å›false
 					}
 				}
 			}
@@ -427,8 +580,8 @@ public:
 					if (falumni.getDepartment() == department.departments[i]) {
 						break;
 					}
-					if (department.departments.size() - 1) {
-						return false; //Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬Ôò·µ»Øfalse
+					if (i == department.departments.size() - 1) {
+						return false; //å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œåˆ™è¿”å›false
 					}
 				}
 			}
@@ -437,8 +590,8 @@ public:
 					if (falumni.getMajor() == major.majors[i]) {
 						break;
 					}
-					if (major.majors.size() - 1) {
-						return false; //Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬Ôò·µ»Øfalse
+					if (i == major.majors.size() - 1) {
+						return false; //å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œåˆ™è¿”å›false
 					}
 				}
 			}
@@ -447,8 +600,8 @@ public:
 					if (falumni.getClass() == Class.Classes[i]) {
 						break;
 					}
-					if (Class.Classes.size() - 1) {
-						return false; //Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬Ôò·µ»Øfalse
+					if (i == Class.Classes.size() - 1) {
+						return false; //å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œåˆ™è¿”å›false
 					}
 				}
 			}
@@ -456,23 +609,23 @@ public:
 		}
 	private:
 		struct genders {
-			bool is_filtered = false; // ÊÇ·ñÉ¸Ñ¡
+			bool is_filtered = false; // æ˜¯å¦ç­›é€‰
 			std::vector<char> genders;
 		}gender;
 		struct years_of_graduation {
-			bool is_filtered = false; // ÊÇ·ñÉ¸Ñ¡
+			bool is_filtered = false; // æ˜¯å¦ç­›é€‰
 			std::vector<int> years_of_graduation;
 		}year_of_graduation;
 		struct departments {
-			bool is_filtered = false; // ÊÇ·ñÉ¸Ñ¡
+			bool is_filtered = false; // æ˜¯å¦ç­›é€‰
 			std::vector<std::string> departments;
 		}department;
 		struct majors {
-			bool is_filtered = false; // ÊÇ·ñÉ¸Ñ¡
+			bool is_filtered = false; // æ˜¯å¦ç­›é€‰
 			std::vector<std::string> majors;
 		}major;
 		struct Classes {
-			bool is_filtered = false; // ÊÇ·ñÉ¸Ñ¡
+			bool is_filtered = false; // æ˜¯å¦ç­›é€‰
 			std::vector<std::string> Classes;
 		}Class;
 		vector<Department> department_list;
@@ -486,35 +639,74 @@ public:
 
 
 
-	class alumni_list {//¸ÕĞèList<T>ºÍalumniFilter
+	class alumni_list {//åˆšéœ€List<T>å’ŒalumniFilter
 	public:
 		alumni_list() {}
 		//alumni_list(List<alumni>& alumniList_) :alumniList(alumniList_) {}
 		void sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
+			// å¤„ç†è¾¹ç•Œæƒ…å†µ
+			if (alumniList.head == nullptr || alumniList.head->next == nullptr) {
+				return;
+			}
+
+			// ä½¿ç”¨autoä½†æ­£ç¡®åˆå§‹åŒ–
+			auto sorted = decltype(alumniList.head)(nullptr);
+		    auto curr = alumniList.head;  // å½“å‰å¾…æ’åºèŠ‚ç‚¹
+
+			while (curr != nullptr) {
+				auto next = curr->next;  // ä¿å­˜ä¸‹ä¸€ä¸ªå¾…å¤„ç†èŠ‚ç‚¹
+
+				// åœ¨å·²æ’åºéƒ¨åˆ†ä¸­æ‰¾åˆ°æ’å…¥ä½ç½®
+				if (sorted == nullptr || Compare(curr->data, sorted->data)) {
+					// æ’å…¥åˆ°å·²æ’åºéƒ¨åˆ†çš„å¤´éƒ¨
+					curr->next = sorted;
+					sorted = curr;
+				}
+				else {
+					// åœ¨å·²æ’åºéƒ¨åˆ†ä¸­å¯»æ‰¾æ’å…¥ç‚¹
+					auto pos = sorted;
+					while (pos->next != nullptr && !Compare(curr->data, pos->next->data)) {
+						pos = pos->next;
+					}
+					// æ‰§è¡Œæ’å…¥
+					curr->next = pos->next;
+					pos->next = curr;
+				}
+
+				curr = next;  // å¤„ç†ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+			}
+
+			alumniList.head = sorted;  // æ›´æ–°é“¾è¡¨å¤´
+			/*
 			//List newList;
 			auto p1 = alumniList.head;
-			auto p2 = alumniList.head;//p1,p2¶¼ÎªÄ¿±ê½áµãÇ°Ò»¸ö½áµã
-			//alumniList.head = new Node;//ÄÚ´æ·ÖÅäÊ§°Ü»áÏµÍ³×Ô¼º±ÀÀ££¬²»ÓÃ¹ı¶à´¦Àí
+			auto p2 = alumniList.head;//p1,p2éƒ½ä¸ºç›®æ ‡ç»“ç‚¹å‰ä¸€ä¸ªç»“ç‚¹
+			bool ist = false;//p2ä¸‹ä¸€ä¸ªç»“ç‚¹æ˜¯å¦ä¸å‰é¢ç»“ç‚¹äº¤æ¢
+			//alumniList.head = new Node;//å†…å­˜åˆ†é…å¤±è´¥ä¼šç³»ç»Ÿè‡ªå·±å´©æºƒï¼Œä¸ç”¨è¿‡å¤šå¤„ç†
 			while ((p2->next) != NULL) {//
-				if (Compare(alumniList.head->data, (p2->next)->data)) {//Í·½áµãÌØÊâ´¦Àí
+				if (Compare(alumniList.head->data, (p2->next)->data)) {//å¤´ç»“ç‚¹ç‰¹æ®Šå¤„ç†
 					auto aim = (p2->next);
 					p2->next = aim->next;
 					aim->next = alumniList.head;
 					alumniList.head = aim;
 				}
 				p1 = alumniList.head;
-				while ((p1->next) != (p2->next)) {//½»»»
-					if (Compare((p1->next)->data, (p2->next)->data)) {//Í·½áµãÌØÊâ´¦Àí
+				while ((p1->next) != (p2->next)) {//äº¤æ¢
+					if (Compare((p1->next)->data, (p2->next)->data)) {//å¤´ç»“ç‚¹ç‰¹æ®Šå¤„ç†
 						auto aim = (p2->next);
 						p2->next = aim->next;
 						aim->next = (p1->next);
 						p1->next = aim;
+						ist = true;//å¦‚æœäº¤æ¢äº†ï¼Œåˆ™æ ‡å¿—ä½ä¸ºtrue
 						break;
 					}
 					p1 = p1->next;
 				}
+				if (!ist) {//å¦‚æœäº¤æ¢äº†ï¼Œp2ä¸‹ä¸ªç»“ç‚¹è‡ªç„¶æ˜¯ä¸Šæ¬¡æ¯”è¾ƒç»“ç‚¹çš„åä¸€ä¸ªç»“ç‚¹ï¼Œæ²¡äº¤æ¢åˆ™éœ€è¦åç§»p2
 				p2 = p2->next;
+				}
 			}
+			*/
 		}
 
 		void show() const {
@@ -525,20 +717,13 @@ public:
 				p1->data.show();
 				p1 = p1->next;
 				i++;
-				if (i % 10 == 0) {
-					int choice;
-					cout << "Ñ¡Ïî£º\n 1.ÏÂÒ»Ò³\n 2.·µ»ØÉÏÒ»¼¶\n";
-					choice = Utils::getChoice(2);
-					if (choice == 2) {
-						return;
-					}
-				}
 			}
 		}
 
 		void filter_show(const alumniFilter& myAlumniFilter) const {
 			int i = 1;
 			auto p1 = alumniList.head;
+
 			while (p1 != NULL) {
 				if (myAlumniFilter.filter(p1->data)) {
 					cout << setw(4) << setfill('0') << i << " ";
@@ -546,127 +731,131 @@ public:
 					i++;
 				}
 				p1 = p1->next;
-				if (i % 10 == 0) {
-					int choice;
-					cout << "Ñ¡Ïî£º\n 1.ÏÂÒ»Ò³\n 2.·µ»ØÉÏÒ»¼¶\n";
-					choice = Utils::getChoice(2);
-					if (choice == 2) {
-						break;
-					}
-				}
 			}
 		}
 
 		void show_allowChange() {
 			int i = 1;
 			auto p1 = alumniList.head;
+			int choice;
+			int count = 0;
 			while (p1 != NULL) {
 				cout << setw(4) << setfill('0') << i << " ";
 				p1->data.show();
 				p1 = p1->next;
 				i++;
-				if (i % 10 == 0) {
-					int choice;
-					cout << "Ñ¡Ïî£º\n 1.ÏÂÒ»Ò³\n 2.ĞŞ¸Ä\n 3.É¾³ı\n 4.·µ»ØÉÏÒ»¼¶\n ";
-					choice = Utils::getChoice(4);
-					if (choice == 2) {
-						int num;
-						cout << "ÇëÊäÈëÒªĞŞ¸ÄµÄĞ£ÓÑĞÅÏ¢Ç°µÄĞòºÅ£º";
-						num = Utils::getChoice(i);
-						p1->data.modify_information();
-					}
-					else if (choice == 3) {
-						int num;
-						while (1) {
-							cout << "ÇëÊäÈëÒªÉ¾³ıµÄĞ£ÓÑĞÅÏ¢Ç°µÄĞòºÅ£¨ÊäÈë0½áÊøÊäÈë£©£º";
-							num = Utils::getChoice(i);
-							alumniList.erase(num);
-							if (choice == 0) {
-								break;
-							}
-							else {
-								cout << "É¾³ı³É¹¦£¡\n";
-							}
-						}
-						return;
-					}
-					else if (choice == 4) {
-						break;
-					}
+			}
+			cout << "-------------------------\n";
+			cout << "é€‰é¡¹ï¼š\n1.ä¿®æ”¹\n2.åˆ é™¤\n3.è¿”å›ä¸Šä¸€çº§\n ";
+			cout << "-------------------------\n";
+			choice = Utils::getChoice(4);
+			if (choice == 1) {
+				int num;
+				cout << "è¯·è¾“å…¥è¦ä¿®æ”¹çš„æ ¡å‹ä¿¡æ¯å‰çš„åºå·ï¼š";
+				num = Utils::getChoice(i-1);
+				int c = 1;
+				p1 = alumniList.head;
+				while (c < num) {
+					p1 = p1->next;
+					c++;
 				}
+				p1->data.modify_information();
+				cout << "ä¿®æ”¹æˆåŠŸï¼\n";
+			}
+			else if (choice == 2) {
+				int num;
+				cout << "è¯·è¾“å…¥è¦åˆ é™¤çš„æ ¡å‹ä¿¡æ¯å‰çš„åºå·ï¼š";
+				num = Utils::getChoice(i-1);
+				alumniList.erase(num);
+				cout << "åˆ é™¤æˆåŠŸï¼\n";
+			}
+			else if (choice == 3) {
+				return;
 			}
 		}
 
 		void filter_show_allowChange(const alumniFilter& Filter) {
 			int i = 1;
+			int choice;
 			auto p1 = alumniList.head;
 			while (p1 != NULL) {
-				if (Filter.filter(p1->data)) {//É¸Ñ¡²¢±êĞòºÅ
+				if (Filter.filter(p1->data)) {//ç­›é€‰å¹¶æ ‡åºå·
 					cout << setw(4) << setfill('0') << i << " ";
 					p1->data.show();
 					i++;
 				}
 				p1 = p1->next;
-				if (i % 10 == 0) {
-					int choice;
-					cout << "Ñ¡Ïî£º\n 1.ÏÂÒ»Ò³\n 2.ĞŞ¸Ä\n 3.É¾³ı\n 4.·µ»ØÉÏÒ»¼¶\n ";
-					choice = Utils::getChoice(4);
-					if (choice == 2) {
-						int num;
-						cout << "ÇëÊäÈëÒªĞŞ¸ÄµÄĞ£ÓÑĞÅÏ¢Ç°µÄĞòºÅ£º";
-						num = Utils::getChoice(i);
-						p1->data.modify_information();
+			}
+			cout << "-------------------------\n";
+			cout << "é€‰é¡¹ï¼š\n1.ä¿®æ”¹\n2.åˆ é™¤\n3.è¿”å›ä¸Šä¸€çº§\n ";
+			cout << "-------------------------\n";
+			choice = Utils::getChoice(3);
+			if (choice == 1) {
+				int num;
+				cout << "è¯·è¾“å…¥è¦ä¿®æ”¹çš„æ ¡å‹ä¿¡æ¯å‰çš„åºå·ï¼š";
+				num = Utils::getChoice(i-1);
+				int c = 1;
+				p1 = alumniList.head;
+				while (c < num) {
+					if (Filter.filter(p1->data)) {//ç­›é€‰å¹¶æ ‡åºå·
+						c++;
 					}
-					else if (choice == 3) {
-						int num;
-						while (1) {
-							cout << "ÇëÊäÈëÒªÉ¾³ıµÄĞ£ÓÑĞÅÏ¢Ç°µÄĞòºÅ£¨ÊäÈë0½áÊøÊäÈë£©£º";
-							num = Utils::getChoice(i);
-							alumniList.erase(num);
-							if (choice == 0) {
-								break;
-							}
-							else {
-								cout << "É¾³ı³É¹¦£¡\n";
-							}
-						}
-						return;
-					}
-					else if (choice == 4) {
-						break;
-					}
+					p1 = p1->next;
 				}
+				p1->data.modify_information();
+				cout << "ä¿®æ”¹æˆåŠŸï¼\n";
+			}
+			else if (choice == 2) {
+				int num;
+				cout << "è¯·è¾“å…¥è¦åˆ é™¤çš„æ ¡å‹ä¿¡æ¯å‰çš„åºå·ï¼š";
+				num = Utils::getChoice(i-1);
+				alumniList.erase(num);
+				cout << "åˆ é™¤æˆåŠŸï¼\n";
+			}
+			else if (choice == 3) {
+				return;
 			}
 		}
 
 	alumni_list search_form_line(const std::string& keyword) const {
 		alumni_list result;
+		if (keyword.empty()) return result;
+
 		auto p1 = alumniList.head;
-		int weight = 0;
-		set<pair<int, List<alumni>::Node*>, greater<pair<int, List<alumni>::Node*>>> myset;//´æ´¢Æ¥Åäµ½µÄ½áµãºÍÈ¨Öµ£¬°´ÕÕÈ¨ÖµÅÅĞò,greater<T>±íÊ¾½µĞòÅÅÁĞ
-		while (p1 != NULL) {
-			string gen;//ĞÔ±ğ
-			if (p1->data.getGender() == 'M') {
-				gen = "ÄĞ";
-			}
-			else if (p1->data.getGender() == 'W') {
-				gen = "Å®";
-			}
-			weight += Utils::serach_return_weight(p1->data.getName(), keyword)
-				+ Utils::serach_return_weight(to_string(p1->data.getGraduationYear()), keyword)
-				+ Utils::serach_return_weight(to_string(p1->data.getAge()), keyword)
-				+ Utils::serach_return_weight(gen, keyword)
-				+ Utils::serach_return_weight(p1->data.getMajor(), keyword)
-				+ Utils::serach_return_weight(p1->data.getClass(), keyword)
-				+ Utils::serach_return_weight(p1->data.getDepartment(), keyword);
-			if (weight != 0) {//Èç¹ûÃ»ÓĞÆ¥Åäµ½ÈÎºÎ×Ö¶Î£¬Ôò²»¼ÓÈë½á¹û
-				myset.insert(make_pair(weight, p1));//Èç¹ûÆ¥Åäµ½0¸öÒÔÉÏ×Ö¶Î£¬Á¬´øÈ¨Öµ¼ÓÈë¼¯ºÏset
+		std::set<std::pair<int, List<alumni>::Node*>, std::greater<>> matches;
+
+		while (p1 != nullptr) {
+			int weight = 0;  // æ¯æ¬¡å¾ªç¯é‡ç½®æƒé‡
+
+			// ç»Ÿä¸€ä½¿ç”¨å­—ç¬¦ä¸²å½¢å¼æ¯”è¾ƒ
+			std::string gender_str = (p1->data.getGender() == 'M') ?"ç”·" : "å¥³";
+			std::string year_str = std::to_string(p1->data.getGraduationYear());
+			std::string age_str = std::to_string(p1->data.getAge());
+
+			// è®¡ç®—å„å­—æ®µæƒé‡
+			weight += Utils::search_return_weight(p1->data.getName(), keyword) * 5;       // å§“åæƒé‡æœ€é«˜
+			weight += Utils::search_return_weight(gender_str, keyword) * 2;
+			weight += Utils::search_return_weight(year_str, keyword) * 3;
+			weight += Utils::search_return_weight(age_str, keyword);
+			weight += Utils::search_return_weight(p1->data.getDepartment(), keyword) * 4;
+			weight += Utils::search_return_weight(p1->data.getMajor(), keyword) * 3;
+			weight += Utils::search_return_weight(p1->data.getClass(), keyword)*2;
+
+			if (weight > 0) {
+				matches.emplace(weight, p1); //ä½¿ç”¨ emplace æ›¿ä»£ make_pair,â€‹â€‹é¿å…ä¸´æ—¶å¯¹è±¡çš„æ„é€ å’Œæ‹·è´ï¼Œç›´æ¥åŸåœ°æ„é€ å…ƒç´ ï¼Œæå‡æ€§èƒ½â€‹â€‹ã€‚
+
+
 			}
 			p1 = p1->next;
 		}
-		for (const auto& item : myset) {//Ò»ÖÖ±éÀúÈİÆ÷µÄ·½·¨£¬const±íÊ¾item²»ÄÜ±»ĞŞ¸Ä£¬itemÊÇpairÀàĞÍ¶ÔÏó£¬firstÎªÈ¨Öµ£¬secondÎªÖ¸ÏòNodeµÄÖ¸Õë£¬mysetÊÇÒ»¸öÈİÆ÷
-			result.alumniList.insert(item.second->data);//½«Æ¥Åäµ½µÄ½áµã¼ÓÈë½á¹û
+
+		// æŒ‰æƒé‡é™åºæ’å…¥ç»“æœ
+		for (const auto& match : matches) {
+			int w = match.first;
+			auto* node = match.second;
+			result.alumniList.insert(node->data);
 		}
+
 		return result;
 	}
 
@@ -682,8 +871,33 @@ public:
 	alumni operator[](int num) {
 		return alumniList[num];
 	}
+	alumni_list& operator=(const alumni_list& other) {
+		this->alumniList = other.alumniList;
+		return (*this);
+	}
+	/*List<T>& operator=(const List<T>& other) {
+		if (!(this == &other)) { // é˜²æ­¢è‡ªèµ‹å€¼
+			clear(); // æ¸…ç©ºå½“å‰åˆ—è¡¨
+			Node* current = other.head;
+			while (current != NULL) {
+				insert(current->data); // é€ä¸ªæ’å…¥å…¶ä»–åˆ—è¡¨çš„å…ƒç´ 
+				current = current->next;
+			}
+		}
+		return *this; // è¿”å›å½“å‰å¯¹è±¡çš„å¼•ç”¨
+	}*/
 	bool count(const alumni& val) {
 		return alumniList.count(val);
+	}
+	alumni find(const alumni& val) {
+		auto p1 = alumniList.head;
+		while (p1 != NULL) {
+			if (p1->data == val) {
+				return p1->data; // æ‰¾åˆ°å…ƒç´ ï¼Œè¿”å›true
+			}
+			p1 = p1->next;
+		}
+		return val; // æ²¡æœ‰æ‰¾åˆ°å…ƒç´ ï¼Œè¿”å›false
 	}
 	auto begin() const { return  alumniList.begin(); }
 	auto end() const { return alumniList.end(); }
@@ -698,21 +912,21 @@ private:
 
 
 
-class fileManager {//Ğèalumnilist
+class fileManager {//éœ€alumnilist
 public:
-	static void save_alumni_list(const string& fileName, const alumni_list& alumniList) {// ±£´æĞ£ÓÑÁĞ±íµ½ÎÄ¼ş 
+	static void save_alumni_list(const string& fileName, const alumni_list& alumniList) {// ä¿å­˜æ ¡å‹åˆ—è¡¨åˆ°æ–‡ä»¶ 
 		if (alumniList.empty()) {
-			return; // Èç¹ûÁĞ±íÎª¿Õ£¬Ö±½Ó·µ»Ø
+			return; // å¦‚æœåˆ—è¡¨ä¸ºç©ºï¼Œç›´æ¥è¿”å›
 		}
-		ofstream outfile(fileName);//²»Ó¦Ê¹ÓÃ"fileName"
-		if (!outfile) { // ¼ì²éÎÄ¼şÊÇ·ñ³É¹¦´ò¿ª
-			cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << fileName << endl;
+		ofstream outfile(fileName);//ä¸åº”ä½¿ç”¨"fileName"
+		if (!outfile) { // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æˆåŠŸæ‰“å¼€
+			cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << fileName << endl;
 			return;
 		}
-		outfile << "ÕËºÅ,ÃÜÂë,ĞÕÃû,ĞÕÃûÆ´Òô,ĞÔ±ğ,ÄêÁä,±ÏÒµÄê·İ,Ïµ,×¨Òµ,°à¼¶,µØÖ·,µç»°ºÅÂë,QQ,µç×ÓÓÊÏä\n"; // Ğ´Èë±íÍ·£¨CSV¸ñÊ½,Í¨ÓÃĞÔÇ¿£¬¿ÉÒÔÓÃExcel´ò¿ª(·Ö¸ô·ûÍÆ¼ö£¬»ò\t£©£©
+		outfile << "è´¦å·,å¯†ç ,å§“å,å§“åæ‹¼éŸ³,æ€§åˆ«,å¹´é¾„,æ¯•ä¸šå¹´ä»½,ç³»,ä¸“ä¸š,ç­çº§,åœ°å€,ç”µè¯å·ç ,QQ,ç”µå­é‚®ç®±\n"; // å†™å…¥è¡¨å¤´ï¼ˆCSVæ ¼å¼,é€šç”¨æ€§å¼ºï¼Œå¯ä»¥ç”¨Excelæ‰“å¼€(åˆ†éš”ç¬¦æ¨èï¼Œæˆ–\tï¼‰ï¼‰
 		auto it = alumniList.begin();//
 		while (it != alumniList.end()) {
-			outfile << (*it).getUserName() << "," //×Ô¶¨Òåµü´úÆ÷ÖØÔØÁË'*'£¬*it¼´Îªalumni¶ÔÏó
+			outfile << (*it).getUserName() << "," //è‡ªå®šä¹‰è¿­ä»£å™¨é‡è½½äº†'*'ï¼Œ*itå³ä¸ºalumniå¯¹è±¡
 				<< (*it).getPassword() << ","
 				<< (*it).getName() << ","
 				<< (*it).getPinyin() << ","
@@ -726,15 +940,15 @@ public:
 				<< (*it).getPhoneNumber() << ","
 				<< (*it).getQQ() << ","
 				<< (*it).getEmail() << "\n";
-			++it; // ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ
+			++it; // ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´ 
 		}
-		outfile.close(); // ¹Ø±ÕÎÄ¼ş
+		outfile.close(); // å…³é—­æ–‡ä»¶
 	}
 	static alumni_list load_alumni_list(const string& fileName) {
 		ifstream infile(fileName);
-		if (!infile) { // ¼ì²éÎÄ¼şÊÇ·ñ³É¹¦´ò¿ª
-			cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << fileName << endl;
-			return alumni_list(); // ·µ»ØÒ»¸ö¿ÕµÄ alumni_list
+		if (!infile) { // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æˆåŠŸæ‰“å¼€
+			cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << fileName << endl;
+			return alumni_list(); // è¿”å›ä¸€ä¸ªç©ºçš„ alumni_list
 		}
 		alumni_list alumniList;
 		string line;
@@ -742,7 +956,7 @@ public:
 		string password_;
 		string name;
 		string pinyin;
-		char gender;
+		char gender=0;
 		int age;
 		int year_of_graduation;
 		string department;
@@ -753,109 +967,113 @@ public:
 		string qq;
 		string email;
 		string tempInformation;
-		getline(infile, line); // ¶ÁÈ¡±íÍ·
-		while (getline(infile, userName_, ',')) {//Óöµ½ÎÄ¼şÖÕÖ¹·û½áÊø
+		getline(infile, line); // è¯»å–è¡¨å¤´
+		while (getline(infile, userName_, ',')) {//é‡åˆ°æ–‡ä»¶ç»ˆæ­¢ç¬¦ç»“æŸ
 			getline(infile, password_, ',');
 			getline(infile, name, ',');
-			getline(infile, pinyin, ','); // ¶ÁÈ¡ĞÕÃûÆ´Òô
+			getline(infile, pinyin, ','); // è¯»å–å§“åæ‹¼éŸ³
 			getline(infile, tempInformation, ',');
-			gender = tempInformation[0]; // ¼ÙÉèĞÔ±ğÊÇµ¥¸ö×Ö·û
+			if (tempInformation == "ç”·") {
+				gender='M'; // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºå­—ç¬¦
+			}
+			else if (tempInformation == "å¥³") {
+				gender = 'W'; // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºå­—ç¬¦
+			}
 			getline(infile, tempInformation, ',');
-			age = stoi(tempInformation); // ½«×Ö·û´®×ª»»ÎªÕûÊı
+			age = stoi(tempInformation); // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•´æ•°
 			getline(infile, tempInformation, ',');
-			year_of_graduation = stoi(tempInformation); // ½«×Ö·û´®×ª»»ÎªÕûÊı
+			year_of_graduation = stoi(tempInformation); // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•´æ•°
 			getline(infile, department, ',');
 			getline(infile, major, ',');
-			getline(infile, tempInformation, ',');
-			Class = stoi(tempInformation); // ½«×Ö·û´®×ª»»ÎªÕûÊı
+			getline(infile, Class, ',');
 			getline(infile, address, ',');
 			getline(infile, phoneNumber, ',');
 			getline(infile, qq, ',');
-			getline(infile, email); // ×îºóÒ»ĞĞÃ»ÓĞ¶ººÅ
-			alumni newAlumni(userName_, password_, name, pinyin, gender, age, year_of_graduation, department, major, Class, address, phoneNumber, qq, email); // ´´½¨Ò»¸öĞÂµÄ alumni ¶ÔÏó
-			alumniList.insert(newAlumni); // ½«ĞÂ¶ÔÏó²åÈëµ½ alumniList ÖĞ
+			getline(infile, email); // æœ€åä¸€è¡Œæ²¡æœ‰é€—å·
+			alumni newAlumni(userName_, password_, name, pinyin, gender, age, year_of_graduation, department, major, Class, address, phoneNumber, qq, email); // åˆ›å»ºä¸€ä¸ªæ–°çš„ alumni å¯¹è±¡
+			alumniList.insert(newAlumni); // å°†æ–°å¯¹è±¡æ’å…¥åˆ° alumniList ä¸­
 		}
-		infile.close(); // ¹Ø±ÕÎÄ¼ş
-		return alumniList; // ·µ»Ø¼ÓÔØµÄ alumni_list
+		infile.close(); // å…³é—­æ–‡ä»¶
+		return alumniList; // è¿”å›åŠ è½½çš„ alumni_list
 	}
 	template <typename T>
 	static void save_T_list(const string& fileName, List<T>& TList) {
 		if (TList.empty()) {
-			return; // Èç¹ûÁĞ±íÎª¿Õ£¬Ö±½Ó·µ»Ø
+			return; // å¦‚æœåˆ—è¡¨ä¸ºç©ºï¼Œç›´æ¥è¿”å›
 		}
-		ofstream outfile(fileName);//²»Ó¦Ê¹ÓÃ"fileName"
-		if (!outfile) { // ¼ì²éÎÄ¼şÊÇ·ñ³É¹¦´ò¿ª
-			cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << fileName << endl;
+		ofstream outfile(fileName);//ä¸åº”ä½¿ç”¨"fileName"
+		if (!outfile) { // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æˆåŠŸæ‰“å¼€
+			cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << fileName << endl;
 			return;
 		}
-		outfile << "ÕËºÅ,ÃÜÂë\n"; // Ğ´Èë±íÍ·£¨CSV¸ñÊ½,Í¨ÓÃĞÔÇ¿£¬¿ÉÒÔÓÃExcel´ò¿ª(·Ö¸ô·ûÍÆ¼ö£¬»ò\t£©£©
+		outfile << "è´¦å·,å¯†ç \n"; // å†™å…¥è¡¨å¤´ï¼ˆCSVæ ¼å¼,é€šç”¨æ€§å¼ºï¼Œå¯ä»¥ç”¨Excelæ‰“å¼€(åˆ†éš”ç¬¦æ¨èï¼Œæˆ–\tï¼‰ï¼‰
 		auto it = TList.begin();
 		while (it != TList.end()) {
-			outfile << (*it).getUserName() << "," //×Ô¶¨Òåµü´úÆ÷ÖØÔØÁË'*'£¬*it¼´Îªalumni¶ÔÏó
+			outfile << (*it).getUserName() << "," //è‡ªå®šä¹‰è¿­ä»£å™¨é‡è½½äº†'*'ï¼Œ*itå³ä¸ºalumniå¯¹è±¡
 				<< (*it).getPassword() << "\n";
-			++it; // ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ
+			++it; // ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´ 
 		}
-		outfile.close(); // ¹Ø±ÕÎÄ¼ş
+		outfile.close(); // å…³é—­æ–‡ä»¶
 	}
 
 	static vector<Department> load_department_list(const string& fileName) {
 		vector<Department> departmentList;
 		ifstream infile(fileName);
-		if (!infile) { // ¼ì²éÎÄ¼şÊÇ·ñ³É¹¦´ò¿ª
-			cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << fileName << endl;
-			return departmentList; // ·µ»ØÒ»¸ö¿ÕµÄ²¿ÃÅÁĞ±í
+		if (!infile) { // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æˆåŠŸæ‰“å¼€
+			cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << fileName << endl;
+			return departmentList; // è¿”å›ä¸€ä¸ªç©ºçš„éƒ¨é—¨åˆ—è¡¨
 		}
 		string departmentName;
-		string pre_departmentName = ""; // ÓÃÓÚ¼ÇÂ¼ÉÏÒ»¸ö²¿ÃÅÃû³Æ
+		string pre_departmentName = ""; // ç”¨äºè®°å½•ä¸Šä¸€ä¸ªéƒ¨é—¨åç§°
 		string majorName;
-		string pre_majorName = ""; // ÓÃÓÚ¼ÇÂ¼ÉÏÒ»¸ö×¨ÒµÃû³Æ
+		string pre_majorName = ""; // ç”¨äºè®°å½•ä¸Šä¸€ä¸ªä¸“ä¸šåç§°
 		string className;
-		string pre_className = ""; // ÓÃÓÚ¼ÇÂ¼ÉÏÒ»¸ö°à¼¶Ãû³Æ
+		string pre_className = ""; // ç”¨äºè®°å½•ä¸Šä¸€ä¸ªç­çº§åç§°
 		string line;
 		getline(infile, line);
-		while (getline(infile, departmentName, ',')) {//Óöµ½ÎÄ¼şÖÕÖ¹·û½áÊø
-			if (!getline(infile, majorName, ',')) break;//·ÀÖ¹ÒâÍâ´íÎó
+		while (getline(infile, departmentName, ',')) {//é‡åˆ°æ–‡ä»¶ç»ˆæ­¢ç¬¦ç»“æŸ
+			if (!getline(infile, majorName, ',')) break;//é˜²æ­¢æ„å¤–é”™è¯¯
 			if (!getline(infile, className)) break;
 			if (departmentName != pre_departmentName) {
-				pre_departmentName = departmentName; // ¸üĞÂÉÏÒ»¸ö²¿ÃÅÃû³Æ
-				Department newDepartment(departmentName); // ´´½¨Ò»¸öĞÂµÄ²¿ÃÅ¶ÔÏó
-				departmentList.push_back(newDepartment); // ½«ĞÂ²¿ÃÅÌí¼Óµ½ÁĞ±íÖĞ
+				pre_departmentName = departmentName; // æ›´æ–°ä¸Šä¸€ä¸ªéƒ¨é—¨åç§°
+				Department newDepartment(departmentName); // åˆ›å»ºä¸€ä¸ªæ–°çš„éƒ¨é—¨å¯¹è±¡
+				departmentList.push_back(newDepartment); // å°†æ–°éƒ¨é—¨æ·»åŠ åˆ°åˆ—è¡¨ä¸­
 			}
-			vector<Major>& majors = departmentList.back().getMajorList(); // »ñÈ¡µ±Ç°²¿ÃÅµÄ×¨ÒµÁĞ±í
+			vector<Major>& majors = departmentList.back().getMajorList(); // è·å–å½“å‰éƒ¨é—¨çš„ä¸“ä¸šåˆ—è¡¨
 			if (majorName != pre_majorName) {
 				pre_majorName = majorName;
 				Major newmajor(majorName);
 				majors.push_back(newmajor);
 			}
-			vector<Class>& classes = majors.back().getClassList(); // »ñÈ¡µ±Ç°×¨ÒµµÄ°à¼¶ÁĞ±í
+			vector<Class>& classes = majors.back().getClassList(); // è·å–å½“å‰ä¸“ä¸šçš„ç­çº§åˆ—è¡¨
 			if (className != pre_className) {
 				pre_className = className;
 				Class newClass(className);
 				classes.push_back(newClass);
 			}
 		}
-		infile.close(); // ¹Ø±ÕÎÄ¼ş
-		return departmentList; // ·µ»Ø¼ÓÔØµÄ²¿ÃÅÁĞ±í
+		infile.close(); // å…³é—­æ–‡ä»¶
+		return departmentList; // è¿”å›åŠ è½½çš„éƒ¨é—¨åˆ—è¡¨
 	}
 	template <typename T>
 	static List<T> load_T_list(const std::string& fileName) {
 		std::ifstream infile(fileName);
-		if (!infile) { // ¼ì²éÎÄ¼şÊÇ·ñ³É¹¦´ò¿ª
-			cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << fileName << endl;
-			return List<T>(); // ·µ»ØÒ»¸ö¿ÕµÄ List<T>
+		if (!infile) { // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æˆåŠŸæ‰“å¼€
+			cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << fileName << endl;
+			return List<T>(); // è¿”å›ä¸€ä¸ªç©ºçš„ List<T>
 		}
 		string line;
 		string userName_;
 		string password_;
-		List<T> TList; // ´´½¨Ò»¸öÍ¨ÓÃÁĞ±í
-		getline(infile, line); // ¶ÁÈ¡±íÍ·
-		while (getline(infile, userName_, ',')) {//Óöµ½ÎÄ¼şÖÕÖ¹·û½áÊø
+		List<T> TList; // åˆ›å»ºä¸€ä¸ªé€šç”¨åˆ—è¡¨
+		getline(infile, line); // è¯»å–è¡¨å¤´
+		while (getline(infile, userName_, ',')) {//é‡åˆ°æ–‡ä»¶ç»ˆæ­¢ç¬¦ç»“æŸ
 			getline(infile, password_);
 			T item(userName_, password_);
 			TList.insert(item);
 		}
-		infile.close(); // ¹Ø±ÕÎÄ¼ş
-		return TList; // ·µ»Ø¼ÓÔØµÄÍ¨ÓÃÁĞ±í
+		infile.close(); // å…³é—­æ–‡ä»¶
+		return TList; // è¿”å›åŠ è½½çš„é€šç”¨åˆ—è¡¨
 	}
 
 }

@@ -28,9 +28,13 @@ class LoginSystem {
 					<< "2.我是校友\n"
 					<< "3.我是访客\n"
 					<< "4.我是管理员\n"
-					<< "-1.退出系统\n"
+					<< "5.退出系统\n"
 					<< "------------------------------\n";
-				int choice = Utils::getChoice(4);
+				int choice = Utils::getChoice(5);
+				if (choice == 5) {
+					cout << "退出系统！\n";
+					exit(0);
+				}
 				while (true) {
 					cout << "请输入账号和密码：\n";
 					string account, password;
@@ -55,58 +59,97 @@ class LoginSystem {
 					List<visitor> current_visitor_list;
 					alumni_list current_alumni_list;
 					List<manager> current_manager_list;
+					current_alumni_list = fileManager::load_alumni_list("alumni.txt");
+					current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
+					current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");
+					current_manager_list = fileManager::load_T_list<manager>("manager.txt");
 					visitor current_visitor(account, password);
 					manager current_manager(account, password);
+					bool lgout = 0;
 					alumni current_alumni(account, password, "", "", '\0', 0, 0, "", "", "", "", "", "", "");
 					switch (choice) {
 					case 1:
-						current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");//需要指定返回值类型
+	
 						if (current_visitor_list.count(current_visitor)) {
 							cout << "登录成功！\n";
-							VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
+							VisitorModle visitorModle(current_visitor_list,current_alumni_list, current_visitor);//创建VisitorModle对象
 							visitorModle.run();
+							lgout = 1;
+						}
+						else {
+							cout << "用户名或密码错误！\n"
+								<< "-------------------------\n"
+								<< "选项：\n"
+								<< "1.重新输入\n"
+								<< "2.返回上一级\n"
+								<< "-------------------------\n";
+	
 						}
 						break;
 					case 2:
-						current_alumni_list = fileManager::load_alumni_list("alumni.txt");
-						if (current_alumni_list.count(current_alumni)) {
+
+						if (current_alumni_list.count(current_alumni)) {//只有person重载==，因此只比较账号密码
+							current_alumni = current_alumni_list.find(current_alumni);
 							cout << "登录成功！\n";
 							alumniModle alumniModle(current_alumni_list, current_alumni);//创建alumniModle对象
 							alumniModle.run();
+							lgout = 1;
+						}
+						else {
+							cout << "用户名或密码错误！\n"
+								<< "-------------------------\n"
+								<< "选项：\n"
+								<< "1.重新输入\n"
+								<< "2.返回上一级\n"
+								<< "-------------------------\n";
+	
 						}
 						break;
 					case 3:
-						current_visitor_list = fileManager::load_T_list<visitor>("visitor.txt");
+					
 						if (current_visitor_list.count(current_visitor)) {
 							cout << "登录成功！\n";
-							VisitorModle visitorModle(current_alumni_list, current_visitor);//创建VisitorModle对象
+							VisitorModle visitorModle(current_visitor_list, current_alumni_list, current_visitor);//创建VisitorModle对象
 							visitorModle.run();
+							lgout = 1;
+						}
+						else {
+							cout << "用户名或密码错误！\n"
+								<< "-------------------------\n"
+								<< "选项：\n"
+								<< "1.重新输入\n"
+								<< "2.返回上一级\n"
+								<< "-------------------------\n";
+	
 						}
 						break;
 					case 4:
-						current_manager_list = fileManager::load_T_list<manager>("manager.txt");
+		
 						if (current_manager_list.count(current_manager)) {
 							cout << "登录成功！\n";
-							managerModle managerModle(current_alumni_list, current_manager);//创建managerModle对象
+							managerModle managerModle(current_visitor_list, current_manager_list,current_alumni_list, current_manager);//创建managerModle对象
 							managerModle.run();
+							lgout = 1;
+						}
+						else {
+							cout << "用户名或密码错误！\n"
+								<< "-------------------------\n"
+								<< "选项：\n"
+								<< "1.重新输入\n"
+								<< "2.返回上一级\n"
+								<< "-------------------------\n";
+							
 						}
 						break;
-					case -1:
-							cout << "退出系统！\n";
-							exit(0);
 					}
-					cout << "用户名或密码错误！\n"
-						<< "-------------------------\n"
-						<< "选项：\n"
-						<< "1.重新输入\n"
-						<< "2.返回上一级\n"
-						<< "-------------------------\n";
-					int choice2 = Utils::getChoice(2);
-					if (choice2 == 1) {
-						continue;
-					}
-					else if (choice2 == 2) {
-						break;
+					if (!lgout) {
+						int choice2 = Utils::getChoice(2);
+						if (choice2 == 1) {
+							continue;
+						}
+						else if (choice2 == 2) {
+							break;
+						}
 					}
 				}
 			}

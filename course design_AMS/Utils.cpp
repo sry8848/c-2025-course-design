@@ -16,6 +16,19 @@ int Utils::getChoice(int numberOfChoices) {//定义无需写static
 		return getChoice(numberOfChoices);
 	}
 }
+int Utils::getChoice_0stop(int numberOfChoices) {
+	int choice;
+	cin >> choice;
+	cin.clear(); // 清除错误标志
+	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
+	if (choice >= 0 && choice <= numberOfChoices) {
+		return choice;
+	}
+	else {
+		cout << "输入错误！请正确输入选项前序号（示例输入：1）\n" << endl;
+		return getChoice(numberOfChoices);
+	}
+}
 string Utils::pinyinInput(){
 	string input;
 	if (!getline(cin, input)) {//getline会吃掉换行符，导致后面有ignore就需要新输入换行符
@@ -100,19 +113,18 @@ string Utils::modifyPassword(string prePassword) {
 		return new_password;
 	}
 }
-	int Utils::serach_return_weight(const std::string& str, const std::string& key) {
-		size_t strp = 0, keyp = 0;
+	int Utils::search_return_weight(const std::string& str, const std::string& key) {
 		int weight = 0;
-		while (keyp < str.size()) {
-			while (strp < str.size()) {
-				if (str[strp] == key[keyp]) {
-					weight += 1;
-					keyp++;
-					if (keyp == key.size()) {
-						return weight;
-					}
-				}
-				strp++;
+		if (str == key) {//完全匹配权重极高
+			return 100;
+		}
+		// 2. 子串匹配：权重次高（返回2倍子串长度）
+		if (str.find(key) != std::string::npos) {
+			return key.size()*2;
+		}
+		for (char k : key) {
+			if (str.find(k) != std::string::npos) {
+				weight++;
 			}
 		}
 		return weight;

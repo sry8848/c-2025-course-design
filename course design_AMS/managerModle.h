@@ -11,7 +11,9 @@
 using namespace std;
 class managerModle {
 public:
-	managerModle(alumni_list current_alumni_list_, manager current_manager_) {
+	managerModle(List<visitor> current_visitor_list,List<manager> current_manager_list, alumni_list current_alumni_list_, manager current_manager_) {
+		current_visitor_list = current_visitor_list;
+		current_manager_list = current_manager_list;
 		current_alumni_list = current_alumni_list_;
 		current_manager = current_manager_;
 	}
@@ -104,6 +106,12 @@ public:
 				switch (choice2) {
 				case 1:
 					current_manager.modify_password();
+					for (auto& manager : current_manager_list) {
+						if (manager.getUserName() == current_manager.getUserName()) {
+							manager = current_manager;  // 更新列表中的对象
+							break;
+						}
+					}
 					fileManager::save_T_list("manager.txt", current_manager_list);
 					break;
 				case 2:

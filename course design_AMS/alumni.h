@@ -132,10 +132,16 @@ public:
 		int qq_choice;
 		int email_choice;
 		int continue_choice;
+		string name_;
+		string department_;
+		string major_;
+		string address_;
+		string email_;
 		switch (choice) {
 		case 1:
 			cout << "请输入姓名：";
-			cin >> name;
+			cin >> name_;
+			name = name_; // 更新person类中的用户名
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
 			cout << "请输入姓名拼音(示例输入：guozhijin)：";
@@ -163,13 +169,15 @@ public:
 			break;
 		case 5:
 			cout << "请输入系：";
-			cin >> department;
+			cin >> department_;
+			department = department_;
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
 			break;
 		case 6:
 			cout << "请输入专业：";
-			cin >> major;
+			cin >> major_;
+			major = major_;
 			cin.clear(); // 清除错误标志
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
 			break;
@@ -185,7 +193,8 @@ public:
 			}
 			else {
 				cout << "请输入地址：";
-				cin >> address;
+				cin >> address_;
+				address = address_; // 更新地址信息
 				cin.clear(); // 清除错误标志
 				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
 			}
@@ -221,7 +230,8 @@ public:
 			}
 			else {
 				cout << "请输入邮箱：";
-				cin >> email;
+				cin >> email_;
+				email = email_; // 更新邮箱信息
 				cin.clear(); // 清除错误标志
 				cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 清除输入缓冲区
 			}
@@ -239,9 +249,17 @@ public:
 	void show() {
 		person::show();
 		cout << "校友信息：\n";
-		cout << "1.姓名：" << name << endl
-			<< "2.性别：" << gender << endl
-			<< "3.年龄：" << age << endl
+		cout << "1.姓名：" << name << endl;
+		if (gender == 'M') {
+			cout << "2.性别：男"<< endl;
+		}
+		else if (gender == 'W') {
+			cout << "2.性别：女" << endl;
+		}
+		else {
+			cout << "2.性别：未知" << endl;
+		}
+		cout<< "3.年龄：" << age << endl
 			<< "4.毕业年份：" << year_of_graduation << endl
 			<< "5.系：" << department << endl
 			<< "6.专业：" << major << endl
@@ -250,6 +268,7 @@ public:
 			<< "9.电话：" << phoneNumber << endl
 			<< "10.QQ：" << qq << endl
 			<< "11.邮箱：" << email << endl;
+		cout << endl;
 	}
 	static bool Compare_by_year_up(const alumni& left, const alumni& right) {
 		return left.year_of_graduation > right.year_of_graduation;

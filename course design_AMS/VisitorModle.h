@@ -13,7 +13,8 @@
 using namespace std;
 class VisitorModle {
 public:
-	VisitorModle(alumni_list current_alumni_list_, visitor current_visitor_) {
+	VisitorModle(List<visitor> current_visitor_list,alumni_list current_alumni_list_, visitor current_visitor_) {
+		current_visitor_list = current_visitor_list;
 		current_alumni_list = current_alumni_list_;
 		current_visitor = current_visitor_;
 	}
@@ -99,12 +100,22 @@ public:
 				switch (choice3) {
 				case 1:
 					current_visitor.modify_password();
+					for (auto& visitor : current_visitor_list) {
+						if (visitor.getUserName() == current_visitor.getUserName()) {
+							visitor = current_visitor;  // 更新列表中的对象
+							break;
+						}
+					}
+					fileManager::save_T_list("visitor.txt", current_visitor_list);
 					break;
 				case 2:
 					break;
 				}
 				break;
 			case 3:
+				fileManager::save_alumni_list("alumni.txt", current_alumni_list);
+				cout << "信息已保存！\n";
+				cout << "退出登录成功！\n";
 				return;
 			}
 
@@ -112,6 +123,7 @@ public:
 	}
 
 private:
+	List<visitor> current_visitor_list;
 	alumni_list current_alumni_list; // 校友列表,注意对象一定不要和类型同名！
 	visitor current_visitor; // 当前访客
 };
