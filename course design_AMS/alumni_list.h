@@ -204,617 +204,582 @@ public:
 
 
 
-	class alumniFilter {//需filemanager和alumni
-	public:
-		//已在定义中初始化成员变量，不需要构造函数来再次初始化，否则报错已有主体定义
-		//析构函数不需要做什么，因为成员变量是值类型，自动释放
-		//如果成员变量是指针类型，则需要手动释放内存
-		alumniFilter(const vector<Department>& department_list_):department_list(department_list_){}//常引用仅传值
-		alumniFilter(const alumniFilter& other)
-			: gender(other.gender),
-			year_of_graduation(other.year_of_graduation),
-			department(other.department),
-			major(other.major),
-			Class(other.Class),
-			department_list(other.department_list) {}
-		void clear_filter() {
-			gender.is_filtered = false;
-			year_of_graduation.is_filtered = false;
-			department.is_filtered = false;
-			major.is_filtered = false;
-			Class.is_filtered = false;
-			gender.genders.clear();
-			year_of_graduation.years_of_graduation.clear();
-			department.departments.clear();
-			major.majors.clear();
-			Class.Classes.clear();
-		}
-		void modify_alumniFilter() {
-			while (true) {
-				cout << "筛选条件(未主动选择条件的类别默认全选)：\n 1.性别\n 2.毕业年份\n 3.系/专业/班级\n 4.确认选择\n";
-				int choice = Utils::getChoice(4);
-				string choices;
-				vector<int> years;
-				//vector<Department> department_list;//小心department与alumni.department冲突//修改为类成员
-				int gender_choice;
-				time_t t = time(0);
-				tm now;  // 定义本地变量存储时间信息
-				// 使用线程安全的 localtime_s 替代 localtime
-				if (localtime_s(&now, &t) == 0) {
-					// 成功获取本地时间，可操作 now 结构体
-				}
-				else {
-					// 处理错误
-				}
-				int current_year;
-				int current_month = now.tm_mon + 1;
-				int year = 2010;
-				int count = 1;
-				int year_choice;
-				int department_choice;
-				int dep_choice;
-				int maj_choice;
-				int class_choice;
-				int continue_choice;
-				bool isM = 0, isW = 0;
-				std::set<int> selected_years_set;
-				switch (choice) {
-				case 1:
-					cout << "性别筛选(输入序号，切换选择状态，输入0结束输入，示例输入：1)：\n 1.男\n 2.女\n";
-					while (gender_choice = Utils::getChoice_0stop(2)) {
-						if (gender_choice == 1) {
-							auto it = find(gender.genders.begin(), gender.genders.end(), 'M');
-							if (it == gender.genders.end()) {
-								gender.genders.push_back('M'); // 添加
-								cout << "选中：男\n";
-							}
-							else {
-								gender.genders.erase(it);      // 移除
-								cout << "取消选中：男\n";
-							}
-						}
-						else if (gender_choice == 2) {
-							auto it = find(gender.genders.begin(), gender.genders.end(), 'W');
-							if (it == gender.genders.end()) {
-								gender.genders.push_back('W'); // 添加
-								cout << "选中：女\n";
-							}
-							else {
-								gender.genders.erase(it);      // 移除
-								cout << "取消选中：女\n";
-							}
-						}
-					}
-					if (gender.genders.size() == 0) {
-						gender.is_filtered = false;
-					}
-					else {
-						gender.is_filtered = true;
-					}
-					break;
-				case 2:
-					if (current_month >= 7) {//如果当前月份大于等于7月，则毕业年份为当前年份
-						current_year = now.tm_year + 1900;
-					}
-					else {
-						current_year = now.tm_year + 1900 - 1;
-					}
-					while (year <= current_year) {
-						years.push_back(year);
-						cout << setfill('0') << setw(2) << count << " " << year << endl;
-						year++;
-						count++;
-					}
-					cout << "毕业年份筛选(输入序号,切换选择状态,输入0结束输入，示例输入：1)：\n";
-					while (true) {
-						year_choice = Utils::getChoice_0stop(years.size()); // 获取用户输入
-						if (year_choice == 0) break;                 // 输入0退出
-
-						int selected_year = years[year_choice - 1];   // 获取实际年份
-						auto it = selected_years_set.find(selected_year);//set是集合
-
-						// 切换选中状态
-						if (it == selected_years_set.end()) {
-							selected_years_set.insert(selected_year); // 未选中 → 添加
-							cout << "已选中年份: " << selected_year << endl;
+class alumniFilter {//需filemanager和alumni
+public:
+	//已在定义中初始化成员变量，不需要构造函数来再次初始化，否则报错已有主体定义
+	//析构函数不需要做什么，因为成员变量是值类型，自动释放
+	//如果成员变量是指针类型，则需要手动释放内存
+	alumniFilter(const vector<Department>& department_list_) :department_list(department_list_) {}//常引用仅传值
+	alumniFilter(const alumniFilter& other)
+		: gender(other.gender),
+		year_of_graduation(other.year_of_graduation),
+		department(other.department),
+		major(other.major),
+		Class(other.Class),
+		department_list(other.department_list) {}
+	void clear_filter() {
+		gender.is_filtered = false;
+		year_of_graduation.is_filtered = false;
+		department.is_filtered = false;
+		major.is_filtered = false;
+		Class.is_filtered = false;
+		gender.genders.clear();
+		year_of_graduation.years_of_graduation.clear();
+		department.departments.clear();
+		major.majors.clear();
+		Class.Classes.clear();
+	}
+	void modify_alumniFilter() {
+		while (true) {
+			cout << "筛选条件(未主动选择条件的类别默认全选)：\n 1.性别\n 2.毕业年份\n 3.系/专业/班级\n 4.确认选择\n";
+			int choice = Utils::getChoice(4);
+			string choices;
+			vector<int> years;
+			//vector<Department> department_list;//小心department与alumni.department冲突//修改为类成员
+			int gender_choice;
+			time_t t = time(0);
+			tm now;  // 定义本地变量存储时间信息
+			// 使用线程安全的 localtime_s 替代 localtime
+			if (localtime_s(&now, &t) == 0) {
+				// 成功获取本地时间，可操作 now 结构体
+			}
+			else {
+				// 处理错误
+			}
+			int current_year;
+			int current_month = now.tm_mon + 1;
+			int year = 2010;
+			int count = 1;
+			int year_choice;
+			int department_choice;
+			int dep_choice;
+			int maj_choice;
+			int class_choice;
+			int continue_choice;
+			bool isM = 0, isW = 0;
+			std::set<int> selected_years_set;
+			switch (choice) {
+			case 1:
+				cout << "性别筛选(输入序号，切换选择状态，输入0结束输入，示例输入：1)：\n 1.男\n 2.女\n";
+				while (gender_choice = Utils::getChoice_0stop(2)) {
+					if (gender_choice == 1) {
+						auto it = find(gender.genders.begin(), gender.genders.end(), 'M');
+						if (it == gender.genders.end()) {
+							gender.genders.push_back('M'); // 添加
+							cout << "选中：男\n";
 						}
 						else {
-							selected_years_set.erase(it);            // 已选中 → 移除
-							cout << "已取消年份: " << selected_year << endl;
+							gender.genders.erase(it);      // 移除
+							cout << "取消选中：男\n";
 						}
-
-						// 实时显示当前已选年份
-						cout << "当前已选: ";
-						for (int year : selected_years_set) {
-							cout << year << " ";
-						}
-						cout << endl;
 					}
-
-					// 将最终结果保存到 year_of_graduation
-					year_of_graduation.years_of_graduation.assign(
-						selected_years_set.begin(),
-						selected_years_set.end()
-					);
-
-					if (year_of_graduation.years_of_graduation.size() == 0) {
-						year_of_graduation.is_filtered = false;
-					}
-					else {
-						year_of_graduation.is_filtered = true;
-					}
-					break;
-				case 3:
-					//department_list = fileManager::load_department_list("department.txt");以作为成员存在
-					cout << "系/专业/班级筛选(输入序号,选择筛选条件)：\n 1.系\n 2.专业\n 3.班级\n";
-					department_choice = Utils::getChoice(3);
-					switch (department_choice) {
-					case 1: { // 系筛选
-						cout << "请选择系（输入序号切换选择状态，输入0结束）：\n";
-						for (size_t i = 0; i < department_list.size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< department_list[i].getDepartmentName() << endl;
+					else if (gender_choice == 2) {
+						auto it = find(gender.genders.begin(), gender.genders.end(), 'W');
+						if (it == gender.genders.end()) {
+							gender.genders.push_back('W'); // 添加
+							cout << "选中：女\n";
 						}
-
-						while (true) {
-							dep_choice = Utils::getChoice_0stop(department_list.size());
-							if (dep_choice == 0) break;
-
-							const string& dept = department_list[dep_choice - 1].getDepartmentName();//相当于define字符替换
-							auto it = find(department.departments.begin(), department.departments.end(), dept);
-
-							if (it == department.departments.end()) {
-								department.departments.push_back(dept);
-								cout << "已选中系: " << dept << endl;
-							}
-							else {
-								department.departments.erase(it);
-								cout << "已取消系: " << dept << endl;
-							}
-
-							cout << "当前已选: ";
-							for (const auto& d : department.departments) cout << d << " ";
-							cout << endl;
+						else {
+							gender.genders.erase(it);      // 移除
+							cout << "取消选中：女\n";
 						}
-						department.is_filtered = !department.departments.empty();
-						break;
-					}
-					case 2: { // 专业筛选
-						cout << "请先选择系（单选）：\n";
-						for (size_t i = 0; i < department_list.size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< department_list[i].getDepartmentName() << endl;
-						}
-
-						dep_choice = Utils::getChoice(department_list.size());
-						Department& curDept = department_list[dep_choice - 1];
-
-						cout << "请选择专业（输入序号切换选择状态，输入0结束）：\n";
-						for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< curDept.getMajorList()[i].getMajorName() << endl;
-						}
-
-						while (true) {
-							maj_choice = Utils::getChoice_0stop(curDept.getMajorList().size());
-							if (maj_choice == 0) break;
-
-							const string& maj = curDept.getMajorList()[maj_choice - 1].getMajorName();
-							auto it = find(major.majors.begin(), major.majors.end(), maj);
-
-							if (it == major.majors.end()) {
-								major.majors.push_back(maj);
-								cout << "已选中专业: " << maj << endl;
-							}
-							else {
-								major.majors.erase(it);
-								cout << "已取消专业: " << maj << endl;
-							}
-
-							cout << "当前已选: ";
-							for (const auto& m : major.majors) cout << m << " ";
-							cout << endl;
-						}
-						major.is_filtered = !major.majors.empty();
-						break;
-					}
-					case 3: { // 班级筛选
-						cout << "请先选择系（单选）：\n";
-						for (size_t i = 0; i < department_list.size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< department_list[i].getDepartmentName() << endl;
-						}
-
-						dep_choice = Utils::getChoice(department_list.size());
-						Department& curDept = department_list[dep_choice - 1];
-
-						cout << "请选择专业（单选）：\n";
-						for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< curDept.getMajorList()[i].getMajorName() << endl;
-						}
-						maj_choice = Utils::getChoice(curDept.getMajorList().size());
-						Major& curMajor = curDept.getMajorList()[maj_choice - 1];
-
-						cout << "请选择班级（输入序号切换选择状态，输入0结束）：\n";
-						for (size_t i = 0; i < curMajor.getClassList().size(); ++i) {
-							cout << setfill('0') << setw(2) << i + 1 << " "
-								<< curMajor.getClassList()[i].getClassNumber() << endl;
-						}
-
-						while (true) {
-							class_choice = Utils::getChoice_0stop(curMajor.getClassList().size());
-							if (class_choice == 0) break;
-
-							const string& cls = curMajor.getClassList()[class_choice - 1].getClassNumber();
-							auto it = find(Class.Classes.begin(), Class.Classes.end(), cls);
-
-							if (it == Class.Classes.end()) {
-								Class.Classes.push_back(cls);
-								cout << "已选中班级: " << cls << endl;
-							}
-							else {
-								Class.Classes.erase(it);
-								cout << "已取消班级: " << cls << endl;
-							}
-
-							cout << "当前已选: ";
-							for (const auto& c : Class.Classes) cout << c << " ";
-							cout << endl;
-						}
-						Class.is_filtered = !Class.Classes.empty();
-						break;
-					}
-					}
-						case 4:
-							return;
-				}
-			}
-		}
-		void show() {
-			cout << "筛选条件：\n";
-			cout << "性别：";
-			if (gender.genders.empty()) {
-				cout << "未设置";
-			}
-			else {
-				std::sort(gender.genders.begin(), gender.genders.end());
-				bool first = true;
-				for (char g : gender.genders) {
-					if (!first) cout << "、";
-					cout << (g == 'M' ? "男" : "女");
-					first = false;
-				}
-			}
-			cout << endl;
-
-			// 2. 毕业年份筛选条件
-			cout << "毕业年份：";
-			if (year_of_graduation.years_of_graduation.empty()) {
-				cout << "未设置";
-			}
-			else {
-				std::sort(year_of_graduation.years_of_graduation.begin(),
-					year_of_graduation.years_of_graduation.end());
-				bool first = true;
-				for (int year : year_of_graduation.years_of_graduation) {
-					if (!first) cout << "、";
-					cout << year;
-					first = false;
-				}
-			}
-			cout << endl;
-
-			// 3. 系筛选条件
-			cout << "系：";
-			if (department.departments.empty()) {
-				cout << "未设置";
-			}
-			else {
-				std::sort(department.departments.begin(), department.departments.end());
-				bool first = true;
-				for (const auto& dept : department.departments) {
-					if (!first) cout << "、";
-					cout << dept;
-					first = false;
-				}
-			}
-			cout << endl;
-
-			// 4. 专业筛选条件
-			cout << "专业：";
-			if (major.majors.empty()) {
-				cout << "未设置";
-			}
-			else {
-				std::sort(major.majors.begin(), major.majors.end());
-				bool first = true;
-				for (const auto& maj : major.majors) {
-					if (!first) cout << "、";
-					cout << maj;
-					first = false;
-				}
-			}
-			cout << endl;
-
-			// 5. 班级筛选条件
-			cout << "班级：";
-			if (Class.Classes.empty()) {
-				cout << "未设置";
-			}
-			else {
-				std::sort(Class.Classes.begin(), Class.Classes.end());
-				bool first = true;
-				for (const auto& cls : Class.Classes) {
-					if (!first) cout << "、";
-					cout << cls;
-					first = false;
-				}
-			}
-			cout << endl;
-			cout << endl;
-		}
-		bool filter(const alumni& falumni) const {
-			if (gender.is_filtered == true) {
-				for (size_t i = 0; i < gender.genders.size(); ++i) {
-					if (falumni.getGender() == gender.genders[i]) {
-						break;
-					}
-					if (i == gender.genders.size() - 1) {
-						return false; //如果没有匹配到，则返回false
 					}
 				}
-			}
-			if (year_of_graduation.is_filtered == true) {
-				for (size_t i = 0; i < year_of_graduation.years_of_graduation.size(); ++i) {
-					if (falumni.getGraduationYear() == year_of_graduation.years_of_graduation[i]) {
-						break;
-					}
-					if (i==year_of_graduation.years_of_graduation.size() - 1) {
-						return false; //如果没有匹配到，则返回false
-					}
-				}
-			}
-			if (department.is_filtered == true) {
-				for (size_t i = 0; i < department.departments.size(); ++i) {
-					if (falumni.getDepartment() == department.departments[i]) {
-						break;
-					}
-					if (i == department.departments.size() - 1) {
-						return false; //如果没有匹配到，则返回false
-					}
-				}
-			}
-			if (major.is_filtered == true) {
-				for (size_t i = 0; i < major.majors.size(); ++i) {
-					if (falumni.getMajor() == major.majors[i]) {
-						break;
-					}
-					if (i == major.majors.size() - 1) {
-						return false; //如果没有匹配到，则返回false
-					}
-				}
-			}
-			if (Class.is_filtered == true) {
-				for (size_t i = 0; i < Class.Classes.size(); ++i) {
-					if (falumni.getClass() == Class.Classes[i]) {
-						break;
-					}
-					if (i == Class.Classes.size() - 1) {
-						return false; //如果没有匹配到，则返回false
-					}
-				}
-			}
-			return true;
-		}
-	private:
-		struct genders {
-			bool is_filtered = false; // 是否筛选
-			std::vector<char> genders;
-		}gender;
-		struct years_of_graduation {
-			bool is_filtered = false; // 是否筛选
-			std::vector<int> years_of_graduation;
-		}year_of_graduation;
-		struct departments {
-			bool is_filtered = false; // 是否筛选
-			std::vector<std::string> departments;
-		}department;
-		struct majors {
-			bool is_filtered = false; // 是否筛选
-			std::vector<std::string> majors;
-		}major;
-		struct Classes {
-			bool is_filtered = false; // 是否筛选
-			std::vector<std::string> Classes;
-		}Class;
-		vector<Department> department_list;
-	};
-	
-
-
-
-	//////////////////////////////////////////////////////////////////////////
-
-
-
-
-	class alumni_list {//刚需List<T>和alumniFilter
-	public:
-		alumni_list() {}
-		//alumni_list(List<alumni>& alumniList_) :alumniList(alumniList_) {}
-		void sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
-			// 处理边界情况
-			if (alumniList.head == nullptr || alumniList.head->next == nullptr) {
-				return;
-			}
-			// 使用auto但正确初始化
-			auto sorted = decltype(alumniList.head)(nullptr);
-		    auto curr = alumniList.head;  // 当前待排序节点
-
-			while (curr != nullptr) {
-				auto next = curr->next;  // 保存下一个待处理节点
-
-				// 在已排序部分中找到插入位置
-				if (sorted == nullptr || Compare(curr->data, sorted->data)) {
-					// 插入到已排序部分的头部
-					curr->next = sorted;
-					sorted = curr;
+				if (gender.genders.size() == 0) {
+					gender.is_filtered = false;
 				}
 				else {
-					// 在已排序部分中寻找插入点
-					auto pos = sorted;
-					while (pos->next != nullptr && !Compare(curr->data, pos->next->data)) {
-						pos = pos->next;
-					}
-					// 执行插入
-					curr->next = pos->next;
-					pos->next = curr;
+					gender.is_filtered = true;
 				}
+				break;
+			case 2:
+				if (current_month >= 7) {//如果当前月份大于等于7月，则毕业年份为当前年份
+					current_year = now.tm_year + 1900;
+				}
+				else {
+					current_year = now.tm_year + 1900 - 1;
+				}
+				while (year <= current_year) {
+					years.push_back(year);
+					cout << setfill('0') << setw(2) << count << " " << year << endl;
+					year++;
+					count++;
+				}
+				cout << "毕业年份筛选(输入序号,切换选择状态,输入0结束输入，示例输入：1)：\n";
+				while (true) {
+					year_choice = Utils::getChoice_0stop(years.size()); // 获取用户输入
+					if (year_choice == 0) break;                 // 输入0退出
+					int selected_year = years[year_choice - 1];   // 获取实际年份
+					auto it = selected_years_set.find(selected_year);//set是集合
+					// 切换选中状态
+					if (it == selected_years_set.end()) {
+						selected_years_set.insert(selected_year); // 未选中 → 添加
+						cout << "已选中年份: " << selected_year << endl;
+					}
+					else {
+						selected_years_set.erase(it);            // 已选中 → 移除
+						cout << "已取消年份: " << selected_year << endl;
+					}
+					// 实时显示当前已选年份
+					cout << "当前已选: ";
+					for (int year : selected_years_set) {
+						cout << year << " ";
+					}
+					cout << endl;
+				}
+				// 将最终结果保存到 year_of_graduation
+				year_of_graduation.years_of_graduation.assign(
+					selected_years_set.begin(),
+					selected_years_set.end()
+				);
 
-				curr = next;  // 处理下一个节点
+				if (year_of_graduation.years_of_graduation.size() == 0) {
+					year_of_graduation.is_filtered = false;
+				}
+				else {
+					year_of_graduation.is_filtered = true;
+				}
+				break;
+			case 3:
+				//department_list = fileManager::load_department_list("department.txt");以作为成员存在
+				cout << "系/专业/班级筛选(输入序号,选择筛选条件)：\n 1.系\n 2.专业\n 3.班级\n";
+				department_choice = Utils::getChoice(3);
+				switch (department_choice) {
+				case 1: { // 系筛选
+					cout << "请选择系（输入序号切换选择状态，输入0结束）：\n";
+					for (size_t i = 0; i < department_list.size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< department_list[i].getDepartmentName() << endl;
+					}
+
+					while (true) {
+						dep_choice = Utils::getChoice_0stop(department_list.size());
+						if (dep_choice == 0) break;
+						const string& dept = department_list[dep_choice - 1].getDepartmentName();//相当于define字符替换
+						auto it = find(department.departments.begin(), department.departments.end(), dept);
+
+						if (it == department.departments.end()) {
+							department.departments.push_back(dept);
+							cout << "已选中系: " << dept << endl;
+						}
+						else {
+							department.departments.erase(it);
+							cout << "已取消系: " << dept << endl;
+						}
+
+						cout << "当前已选: ";
+						for (const auto& d : department.departments) cout << d << " ";
+						cout << endl;
+					}
+					department.is_filtered = !department.departments.empty();
+					break;
+				}
+				case 2: { // 专业筛选
+					cout << "请先选择系（单选）：\n";
+					for (size_t i = 0; i < department_list.size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< department_list[i].getDepartmentName() << endl;
+					}
+
+					dep_choice = Utils::getChoice(department_list.size());
+					Department& curDept = department_list[dep_choice - 1];
+
+					cout << "请选择专业（输入序号切换选择状态，输入0结束）：\n";
+					for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< curDept.getMajorList()[i].getMajorName() << endl;
+					}
+
+					while (true) {
+						maj_choice = Utils::getChoice_0stop(curDept.getMajorList().size());
+						if (maj_choice == 0) break;
+
+						const string& maj = curDept.getMajorList()[maj_choice - 1].getMajorName();
+						auto it = find(major.majors.begin(), major.majors.end(), maj);
+
+						if (it == major.majors.end()) {
+							major.majors.push_back(maj);
+							cout << "已选中专业: " << maj << endl;
+						}
+						else {
+							major.majors.erase(it);
+							cout << "已取消专业: " << maj << endl;
+						}
+
+						cout << "当前已选: ";
+						for (const auto& m : major.majors) cout << m << " ";
+						cout << endl;
+					}
+					major.is_filtered = !major.majors.empty();
+					break;
+				}
+				case 3: { // 班级筛选
+					cout << "请先选择系（单选）：\n";
+					for (size_t i = 0; i < department_list.size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< department_list[i].getDepartmentName() << endl;
+					}
+
+					dep_choice = Utils::getChoice(department_list.size());
+					Department& curDept = department_list[dep_choice - 1];
+
+					cout << "请选择专业（单选）：\n";
+					for (size_t i = 0; i < curDept.getMajorList().size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< curDept.getMajorList()[i].getMajorName() << endl;
+					}
+					maj_choice = Utils::getChoice(curDept.getMajorList().size());
+					Major& curMajor = curDept.getMajorList()[maj_choice - 1];
+
+					cout << "请选择班级（输入序号切换选择状态，输入0结束）：\n";
+					for (size_t i = 0; i < curMajor.getClassList().size(); ++i) {
+						cout << setfill('0') << setw(2) << i + 1 << " "
+							<< curMajor.getClassList()[i].getClassNumber() << endl;
+					}
+
+					while (true) {
+						class_choice = Utils::getChoice_0stop(curMajor.getClassList().size());
+						if (class_choice == 0) break;
+
+						const string& cls = curMajor.getClassList()[class_choice - 1].getClassNumber();
+						auto it = find(Class.Classes.begin(), Class.Classes.end(), cls);
+
+						if (it == Class.Classes.end()) {
+							Class.Classes.push_back(cls);
+							cout << "已选中班级: " << cls << endl;
+						}
+						else {
+							Class.Classes.erase(it);
+							cout << "已取消班级: " << cls << endl;
+						}
+
+						cout << "当前已选: ";
+						for (const auto& c : Class.Classes) cout << c << " ";
+						cout << endl;
+					}
+					Class.is_filtered = !Class.Classes.empty();
+					break;
+				}
+				}
+			case 4:
+				return;
+			}
+		}
+	}
+	void show() {
+		cout << "筛选条件：\n";
+		cout << "性别：";
+		if (gender.genders.empty()) {
+			cout << "未设置";
+		}
+		else {
+			std::sort(gender.genders.begin(), gender.genders.end());
+			bool first = true;
+			for (char g : gender.genders) {
+				if (!first) cout << "、";
+				cout << (g == 'M' ? "男" : "女");
+				first = false;
+			}
+		}
+		cout << endl;
+
+		// 2. 毕业年份筛选条件
+		cout << "毕业年份：";
+		if (year_of_graduation.years_of_graduation.empty()) {
+			cout << "未设置";
+		}
+		else {
+			std::sort(year_of_graduation.years_of_graduation.begin(),
+				year_of_graduation.years_of_graduation.end());
+			bool first = true;
+			for (int year : year_of_graduation.years_of_graduation) {
+				if (!first) cout << "、";
+				cout << year;
+				first = false;
+			}
+		}
+		cout << endl;
+
+		// 3. 系筛选条件
+		cout << "系：";
+		if (department.departments.empty()) {
+			cout << "未设置";
+		}
+		else {
+			std::sort(department.departments.begin(), department.departments.end());
+			bool first = true;
+			for (const auto& dept : department.departments) {
+				if (!first) cout << "、";
+				cout << dept;
+				first = false;
+			}
+		}
+		cout << endl;
+
+		// 4. 专业筛选条件
+		cout << "专业：";
+		if (major.majors.empty()) {
+			cout << "未设置";
+		}
+		else {
+			std::sort(major.majors.begin(), major.majors.end());
+			bool first = true;
+			for (const auto& maj : major.majors) {
+				if (!first) cout << "、";
+				cout << maj;
+				first = false;
+			}
+		}
+		cout << endl;
+
+		// 5. 班级筛选条件
+		cout << "班级：";
+		if (Class.Classes.empty()) {
+			cout << "未设置";
+		}
+		else {
+			std::sort(Class.Classes.begin(), Class.Classes.end());
+			bool first = true;
+			for (const auto& cls : Class.Classes) {
+				if (!first) cout << "、";
+				cout << cls;
+				first = false;
+			}
+		}
+		cout << endl;
+		cout << endl;
+	}
+	bool filter(const alumni& falumni) const {
+		if (gender.is_filtered == true) {
+			for (size_t i = 0; i < gender.genders.size(); ++i) {
+				if (falumni.getGender() == gender.genders[i]) {
+					break;
+				}
+				if (i == gender.genders.size() - 1) {
+					return false; //如果没有匹配到，则返回false
+				}
+			}
+		}
+		if (year_of_graduation.is_filtered == true) {
+			for (size_t i = 0; i < year_of_graduation.years_of_graduation.size(); ++i) {
+				if (falumni.getGraduationYear() == year_of_graduation.years_of_graduation[i]) {
+					break;
+				}
+				if (i == year_of_graduation.years_of_graduation.size() - 1) {
+					return false; //如果没有匹配到，则返回false
+				}
+			}
+		}
+		if (department.is_filtered == true) {
+			for (size_t i = 0; i < department.departments.size(); ++i) {
+				if (falumni.getDepartment() == department.departments[i]) {
+					break;
+				}
+				if (i == department.departments.size() - 1) {
+					return false; //如果没有匹配到，则返回false
+				}
+			}
+		}
+		if (major.is_filtered == true) {
+			for (size_t i = 0; i < major.majors.size(); ++i) {
+				if (falumni.getMajor() == major.majors[i]) {
+					break;
+				}
+				if (i == major.majors.size() - 1) {
+					return false; //如果没有匹配到，则返回false
+				}
+			}
+		}
+		if (Class.is_filtered == true) {
+			for (size_t i = 0; i < Class.Classes.size(); ++i) {
+				if (falumni.getClass() == Class.Classes[i]) {
+					break;
+				}
+				if (i == Class.Classes.size() - 1) {
+					return false; //如果没有匹配到，则返回false
+				}
+			}
+		}
+		return true;
+	}
+private:
+	struct genders {
+		bool is_filtered = false; // 是否筛选
+		std::vector<char> genders;
+	}gender;
+	struct years_of_graduation {
+		bool is_filtered = false; // 是否筛选
+		std::vector<int> years_of_graduation;
+	}year_of_graduation;
+	struct departments {
+		bool is_filtered = false; // 是否筛选
+		std::vector<std::string> departments;
+	}department;
+	struct majors {
+		bool is_filtered = false; // 是否筛选
+		std::vector<std::string> majors;
+	}major;
+	struct Classes {
+		bool is_filtered = false; // 是否筛选
+		std::vector<std::string> Classes;
+	}Class;
+	vector<Department> department_list;
+};
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+class alumni_list {//刚需List<T>和alumniFilter
+public:
+	alumni_list() {}
+	//alumni_list(List<alumni>& alumniList_) :alumniList(alumniList_) {}
+	void sort(bool (*Compare)(const alumni& val1, const alumni& val2)) {
+		// 处理边界情况
+		if (alumniList.head == nullptr || alumniList.head->next == nullptr) {
+			return;
+		}
+		// 使用auto但正确初始化
+		auto sorted = decltype(alumniList.head)(nullptr);
+		auto curr = alumniList.head;  // 当前待排序节点
+
+		while (curr != nullptr) {
+			auto next = curr->next;  // 保存下一个待处理节点
+
+			// 在已排序部分中找到插入位置
+			if (sorted == nullptr || Compare(curr->data, sorted->data)) {
+				// 插入到已排序部分的头部
+				curr->next = sorted;
+				sorted = curr;
+			}
+			else {
+				// 在已排序部分中寻找插入点
+				auto pos = sorted;
+				while (pos->next != nullptr && !Compare(curr->data, pos->next->data)) {
+					pos = pos->next;
+				}
+				// 执行插入
+				curr->next = pos->next;
+				pos->next = curr;
 			}
 
-			alumniList.head = sorted;  // 更新链表头
-			/*
-			//List newList;
-			auto p1 = alumniList.head;
-			auto p2 = alumniList.head;//p1,p2都为目标结点前一个结点
-			bool ist = false;//p2下一个结点是否与前面结点交换
-			//alumniList.head = new Node;//内存分配失败会系统自己崩溃，不用过多处理
-			while ((p2->next) != NULL) {//
-				if (Compare(alumniList.head->data, (p2->next)->data)) {//头结点特殊处理
-					auto aim = (p2->next);
-					p2->next = aim->next;
-					aim->next = alumniList.head;
-					alumniList.head = aim;
-				}
-				p1 = alumniList.head;
-				while ((p1->next) != (p2->next)) {//交换
-					if (Compare((p1->next)->data, (p2->next)->data)) {//头结点特殊处理
-						auto aim = (p2->next);
-						p2->next = aim->next;
-						aim->next = (p1->next);
-						p1->next = aim;
-						ist = true;//如果交换了，则标志位为true
-						break;
-					}
-					p1 = p1->next;
-				}
-				if (!ist) {//如果交换了，p2下个结点自然是上次比较结点的后一个结点，没交换则需要后移p2
-				p2 = p2->next;
-				}
-			}
-			*/
+			curr = next;  // 处理下一个节点
 		}
 
-		void show() const {
-			int i = 1;
-			auto p1 = alumniList.head;
-			while (p1 != NULL) {
+		alumniList.head = sorted;  // 更新链表头
+	}
+
+	void show() const {
+		int i = 1;
+		auto p1 = alumniList.head;
+		while (p1 != NULL) {
+			cout << setw(4) << setfill('0') << i << " ";
+			p1->data.show();
+			p1 = p1->next;
+			i++;
+		}
+	}
+
+	void filter_show(const alumniFilter& myAlumniFilter) const {
+		int i = 1;
+		auto p1 = alumniList.head;
+
+		while (p1 != NULL) {
+			if (myAlumniFilter.filter(p1->data)) {
 				cout << setw(4) << setfill('0') << i << " ";
 				p1->data.show();
-				p1 = p1->next;
 				i++;
 			}
+			p1 = p1->next;
 		}
+	}
 
-		void filter_show(const alumniFilter& myAlumniFilter) const {
-			int i = 1;
-			auto p1 = alumniList.head;
-
-			while (p1 != NULL) {
-				if (myAlumniFilter.filter(p1->data)) {
-					cout << setw(4) << setfill('0') << i << " ";
-					p1->data.show();
-					i++;
-				}
+	void show_allowChange() {
+		int i = 1;
+		auto p1 = alumniList.head;
+		int choice;
+		int count = 0;
+		while (p1 != NULL) {
+			cout << setw(4) << setfill('0') << i << " ";
+			p1->data.show();
+			p1 = p1->next;
+			i++;
+		}
+		cout << "-------------------------\n";
+		cout << "选项：\n1.修改\n2.删除\n3.返回上一级\n ";
+		cout << "-------------------------\n";
+		choice = Utils::getChoice(4);
+		if (choice == 1) {
+			int num;
+			cout << "请输入要修改的校友信息前的序号：";
+			num = Utils::getChoice(i - 1);
+			int c = 1;
+			p1 = alumniList.head;
+			while (c < num) {
 				p1 = p1->next;
+				c++;
 			}
+			p1->data.modify_information();
+			cout << "修改成功！\n";
 		}
+		else if (choice == 2) {
+			int num;
+			cout << "请输入要删除的校友信息前的序号：";
+			num = Utils::getChoice(i - 1);
+			alumniList.erase(num);
+			cout << "删除成功！\n";
+		}
+		else if (choice == 3) {
+			return;
+		}
+	}
 
-		void show_allowChange() {
-			int i = 1;
-			auto p1 = alumniList.head;
-			int choice;
-			int count = 0;
-			while (p1 != NULL) {
+	void filter_show_allowChange(const alumniFilter& Filter) {
+		int i = 1;
+		int choice;
+		auto p1 = alumniList.head;
+		while (p1 != NULL) {
+			if (Filter.filter(p1->data)) {//筛选并标序号
 				cout << setw(4) << setfill('0') << i << " ";
 				p1->data.show();
-				p1 = p1->next;
 				i++;
 			}
-			cout << "-------------------------\n";
-			cout << "选项：\n1.修改\n2.删除\n3.返回上一级\n ";
-			cout << "-------------------------\n";
-			choice = Utils::getChoice(4);
-			if (choice == 1) {
-				int num;
-				cout << "请输入要修改的校友信息前的序号：";
-				num = Utils::getChoice(i-1);
-				int c = 1;
-				p1 = alumniList.head;
-				while (c < num) {
-					p1 = p1->next;
+			p1 = p1->next;
+		}
+		cout << "-------------------------\n";
+		cout << "选项：\n1.修改\n2.删除\n3.返回上一级\n ";
+		cout << "-------------------------\n";
+		choice = Utils::getChoice(3);
+		if (choice == 1) {
+			int num;
+			cout << "请输入要修改的校友信息前的序号：";
+			num = Utils::getChoice(i - 1);
+			int c = 1;
+			p1 = alumniList.head;
+			while (c < num) {
+				if (Filter.filter(p1->data)) {//筛选并标序号
 					c++;
 				}
-				p1->data.modify_information();
-				cout << "修改成功！\n";
-			}
-			else if (choice == 2) {
-				int num;
-				cout << "请输入要删除的校友信息前的序号：";
-				num = Utils::getChoice(i-1);
-				alumniList.erase(num);
-				cout << "删除成功！\n";
-			}
-			else if (choice == 3) {
-				return;
-			}
-		}
-
-		void filter_show_allowChange(const alumniFilter& Filter) {
-			int i = 1;
-			int choice;
-			auto p1 = alumniList.head;
-			while (p1 != NULL) {
-				if (Filter.filter(p1->data)) {//筛选并标序号
-					cout << setw(4) << setfill('0') << i << " ";
-					p1->data.show();
-					i++;
-				}
 				p1 = p1->next;
 			}
-			cout << "-------------------------\n";
-			cout << "选项：\n1.修改\n2.删除\n3.返回上一级\n ";
-			cout << "-------------------------\n";
-			choice = Utils::getChoice(3);
-			if (choice == 1) {
-				int num;
-				cout << "请输入要修改的校友信息前的序号：";
-				num = Utils::getChoice(i-1);
-				int c = 1;
-				p1 = alumniList.head;
-				while (c < num) {
-					if (Filter.filter(p1->data)) {//筛选并标序号
-						c++;
-					}
-					p1 = p1->next;
-				}
-				p1->data.modify_information();
-				cout << "修改成功！\n";
-			}
-			else if (choice == 2) {
-				int num;
-				cout << "请输入要删除的校友信息前的序号：";
-				num = Utils::getChoice(i-1);
-				alumniList.erase(num);
-				cout << "删除成功！\n";
-			}
-			else if (choice == 3) {
-				return;
-			}
+			p1->data.modify_information();
+			cout << "修改成功！\n";
 		}
+		else if (choice == 2) {
+			int num;
+			cout << "请输入要删除的校友信息前的序号：";
+			num = Utils::getChoice(i - 1);
+			alumniList.erase(num);
+			cout << "删除成功！\n";
+		}
+		else if (choice == 3) {
+			return;
+		}
+	}
 
 	alumni_list search_form_line(const std::string& keyword) const {
 		alumni_list result;
@@ -827,7 +792,7 @@ public:
 			int weight = 0;  // 每次循环重置权重
 
 			// 统一使用字符串形式比较
-			std::string gender_str = (p1->data.getGender() == 'M') ?"男" : "女";
+			std::string gender_str = (p1->data.getGender() == 'M') ? "男" : "女";
 			std::string year_str = std::to_string(p1->data.getGraduationYear());
 			std::string age_str = std::to_string(p1->data.getAge());
 
@@ -838,7 +803,7 @@ public:
 			weight += Utils::search_return_weight(age_str, keyword);
 			weight += Utils::search_return_weight(p1->data.getDepartment(), keyword) * 4;
 			weight += Utils::search_return_weight(p1->data.getMajor(), keyword) * 3;
-			weight += Utils::search_return_weight(p1->data.getClass(), keyword)*2;
+			weight += Utils::search_return_weight(p1->data.getClass(), keyword) * 2;
 
 			if (weight > 0) {
 				matches.emplace(weight, p1); //使用 emplace 替代 make_pair,​​避免临时对象的构造和拷贝，直接原地构造元素，提升性能​​。
@@ -874,17 +839,6 @@ public:
 		this->alumniList = other.alumniList;
 		return (*this);
 	}
-	/*List<T>& operator=(const List<T>& other) {
-		if (!(this == &other)) { // 防止自赋值
-			clear(); // 清空当前列表
-			Node* current = other.head;
-			while (current != NULL) {
-				insert(current->data); // 逐个插入其他列表的元素
-				current = current->next;
-			}
-		}
-		return *this; // 返回当前对象的引用
-	}*/
 	bool count(const alumni& val) {
 		return alumniList.count(val);
 	}
@@ -955,7 +909,7 @@ public:
 		string password_;
 		string name;
 		string pinyin;
-		char gender=0;
+		char gender = 0;
 		int age;
 		int year_of_graduation;
 		string department;
@@ -972,12 +926,7 @@ public:
 			getline(infile, name, ',');
 			getline(infile, pinyin, ','); // 读取姓名拼音
 			getline(infile, tempInformation, ',');
-			if (tempInformation == "男") {
-				gender='M'; // 将字符串转换为字符
-			}
-			else if (tempInformation == "女") {
-				gender = 'W'; // 将字符串转换为字符
-			}
+			gender = tempInformation[0];
 			getline(infile, tempInformation, ',');
 			age = stoi(tempInformation); // 将字符串转换为整数
 			getline(infile, tempInformation, ',');

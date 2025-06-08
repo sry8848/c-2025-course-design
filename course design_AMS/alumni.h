@@ -20,7 +20,7 @@ public:
 	std::string getPhoneNumber() const { return phoneNumber; }
 	std::string getQQ() const { return qq; }
 	std::string getEmail() const { return email; }
-	int getGender() const { return gender; }
+	char getGender() const { return gender; }
 
 	alumni(
 		std::string userName_ = "",
@@ -148,10 +148,10 @@ public:
 			pinyin = Utils::pinyinInput(); //验证是否全为字母输入，转换为string类型
 			break;
 		case 2:
-			gender_choice = Utils::getChoice(2);
 			cout << "请选择性别(输入序号)：\n";
 			cout << "1.男" << endl
 				<< "2.女" << endl;
+			gender_choice = Utils::getChoice(2);
 			if (gender_choice == 1) {
 				gender = 'M';
 			}
@@ -271,10 +271,10 @@ public:
 		cout << endl;
 	}
 	static bool Compare_by_year_up(const alumni& left, const alumni& right) {
-		return left.year_of_graduation > right.year_of_graduation;
+		return left.year_of_graduation < right.year_of_graduation;
 	}
 	static bool Compare_by_year_down(const alumni& left, const alumni& right) {
-		return left.year_of_graduation < right.year_of_graduation;
+		return left.year_of_graduation > right.year_of_graduation;
 	}
 	static bool Compare_by_name_up(const alumni& left, const alumni& right) {
 		return left.pinyin < right.pinyin;

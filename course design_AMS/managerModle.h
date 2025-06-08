@@ -174,6 +174,7 @@ public:
 				fileManager::save_alumni_list("alumni.txt", current_alumni_list);
 				cout << "信息已保存！\n";
 				cout << "退出登录成功！\n";
+				cout << endl;
 				return;
 			}
 		}
